@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class table="ca_role_permission" name="com.hzih.bsms.domain.CaRolePermission">
+        <!-- 复合主键使用composite-id标签 -->
+        <composite-id>
+            <!-- key-property标签表示哪一些属性对应复合主键 -->
+            <key-property name="ca_permission_id" column="ca_permission_id" type="int" length="11"></key-property>
+            <key-property name="ca_role_id" column="ca_role_id" type="int" length="11"></key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

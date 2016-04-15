@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class table="http" name="com.hzih.bsms.domain.Http">
+        <id access="field" name="id" type="int" column="id" length="10">
+            <generator class="increment"/>
+        </id>
+        <property name="manager_ip" length="12" column="manager_ip" access="field" type="string"/>
+        <property name="manager_port" length="5" column="manager_port" access="field" type="string"/>
+        <property name="proxy_ip" length="12" column="proxy_ip" access="field" type="string"/>
+        <property name="proxy_port" length="5" column="proxy_port" access="field" type="string"/>
+    </class>
+</hibernate-mapping>

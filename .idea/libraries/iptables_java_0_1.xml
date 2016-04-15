@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="iptables-java-0.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../sharelib/iptables/iptables-java-0.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

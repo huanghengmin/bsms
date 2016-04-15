@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class table="ca_permission" name="com.hzih.bsms.domain.CaPermission">
+        <id access="field" name="id" type="int" column="id" length="11">
+            <generator class="increment"/>
+        </id>
+        <property name="url" column="url" access="field" type="string"/>
+
+        <set cascade="save-update" access="field" lazy="false" table="ca_role_permission" name="roles"  inverse="false">
+            <key column="ca_permission_id"/>
+            <many-to-many class="com.hzih.bsms.domain.CaRole" column="ca_role_id"/>
+        </set>
+    </class>
+</hibernate-mapping>

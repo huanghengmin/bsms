@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class table="ca_role" name="com.hzih.bsms.domain.CaRole">
+        <id access="field" name="id" type="int" column="id" length="11">
+            <generator class="increment"/>
+        </id>
+        <property name="name" length="30" access="field" type="string"/>
+        <property name="description" length="50" access="field" type="string"/>
+        <property name="createdTime" access="field" type="java.util.Date"/>
+        <property name="modifiedTime" access="field" type="java.util.Date"/>
+        <property name="status" access="field" type="int"/>
+
+        <set cascade="save-update" access="field" lazy="false" table="ca_role_permission" name="caPermissions" inverse="false" >
+            <key column="ca_role_id"/>
+            <many-to-many class="com.hzih.bsms.domain.CaPermission" column="ca_permission_id"/>
+        </set>
+
+        <set cascade="save-update" access="field" lazy="false" table="ca_user_role" name="caUsers" inverse="false" >
+            <key column="ca_role_id"/>
+            <many-to-many class="com.hzih.bsms.domain.CaUser" column="ca_user_id"/>
+        </set>
+
+    </class>
+</hibernate-mapping>

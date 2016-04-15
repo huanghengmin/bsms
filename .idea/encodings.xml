@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
+    <file url="file://$PROJECT_DIR$/src/appserver/js/access/manager_bsjsgl.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/js/access/manager_bsqxgl.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/js/access/manager_bsyhgl.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/js/bs/manager_fwqjrpz.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/js/bsproxy/manager_dlfwfwkz.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/js/bsproxy/manager_dlfwpz.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/js/bsproxy/manager_fwqjrpz.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/js/bsproxy/manager_jrfwpz.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/js/bsproxy/manager_ycglpz.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/js/net/manager_interface.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/js/net/manager_ping.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/js/net/manager_router.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/js/net/manager_telnet.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/js/system/manager_config.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/js/system/manager_platform.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/js/user/role.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/js/user/user.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/pages/access/manager_bsjsgl.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/pages/access/manager_bsqxgl.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/pages/access/manager_bsyhgl.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/pages/access/manager_bszygl.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/pages/audit/audit_user.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/pages/bs/manager_fwqjrpz.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/pages/bsproxy/manager_dlfwpz.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/pages/bsproxy/manager_fwqjrpz.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/pages/bsproxy/manager_jrfwpz.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/pages/bsproxy/manager_ycglpz.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/pages/net/manager_interface.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/pages/net/manager_ping.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/pages/net/manager_router.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/pages/net/manager_telnet.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/pages/proxy/basic_parameter.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/pages/proxy/https_proxy.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/pages/proxy/proxy_ca.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/pages/proxy/serve_status.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/pages/system" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/appserver/pages/user" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/com/hzih/bsms/cs/TcpProcess.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/com/hzih/bsms/cs/UdpProcess.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/com/hzih/bsms/service/BlackListService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/com/hzih/bsms/service/CaPermissionService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/com/hzih/bsms/service/CaRolePermissionService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/com/hzih/bsms/service/CaRoleService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/com/hzih/bsms/service/CaUserRoleService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/com/hzih/bsms/service/CaUserService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/com/hzih/bsms/service/WhiteListService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/com/hzih/bsms/service/impl/BlackListServiceImpl.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/com/hzih/bsms/service/impl/CaPermissionServiceImpl.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/com/hzih/bsms/service/impl/CaRolePermissionServiceImpl.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/com/hzih/bsms/service/impl/CaRoleServiceImpl.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/com/hzih/bsms/service/impl/CaUserRoleServiceImpl.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/com/hzih/bsms/service/impl/CaUserServiceImpl.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/com/hzih/bsms/service/impl/WhiteListServiceImpl.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/com/hzih/myjfree/CpuBean.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/com/hzih/myjfree/LiuLiangBean.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/com/hzih/myjfree/WindowsInfoUtil.java" charset="UTF-8" />
+  </component>
+</project>
+

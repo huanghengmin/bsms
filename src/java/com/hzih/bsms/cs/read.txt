@@ -1,0 +1,15 @@
+另外更需要注意的是Debian/Ubuntu上iptables是不会保存规则的。
+
+需要按如下步骤进行，让网卡关闭是保存iptables规则，启动时加载iptables规则：
+
+创建/etc/network/if-post-down.d/iptables 文件，添加如下内容：
+
+#!/bin/bash
+iptables-save > /etc/iptables.rules
+执行：chmod +x /etc/network/if-post-down.d/iptables 添加执行权限。
+
+创建/etc/network/if-pre-up.d/iptables 文件，添加如下内容：
+
+#!/bin/bash
+iptables-restore < /etc/iptables.rules
+执行：chmod +x /etc/network/if-pre-up.d/iptables 添加执行权限。

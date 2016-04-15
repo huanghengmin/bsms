@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class table="ca_user" name="com.hzih.bsms.domain.CaUser">
+        <id access="field" name="id" type="int" column="id" length="11">
+            <generator class="increment"/>
+        </id>
+        <property name="cn" length="50" column="cn" access="field" type="string" />
+        <property name="hzihpassword" length="20" column="hzihpassword" access="field" type="string"/>
+        <property name="hzihid" length="18" column="hzihid" access="field" type="string"/>
+        <set cascade="save-update" access="field" lazy="false" table="ca_user_role" name="caRoles" inverse="false" >
+            <key column="ca_user_id"/>
+            <many-to-many class="com.hzih.bsms.domain.CaRole" column="ca_role_id"/>
+        </set>
+        <property name="hzihphone" length="15" column="hzihphone" access="field" type="string"/>
+        <property name="hzihaddress" length="30" column="hzihaddress" access="field" type="string"/>
+        <property name="hzihemail" length="30" column="hzihemail" access="field" type="string"/>
+        <property name="hzihjobnumber" length="20" column="hzihjobnumber" access="field" type="string"/>
+        <property name="phonenetid" length="20" column="phonenetid" access="field" type="string"/>
+        <property name="hzihcaserialNumber" length="50" column="hzihcaserialNumber" access="field" type="string"/>
+        <property name="terminalid" length="50" column="terminalid" access="field" type="string"/>
+        <!--<property name="terminal_pwd" length="50" column="terminal_pwd" access="field" type="string"/>-->
+        <!--<property name="terminal_pwd_audit" length="50" column="terminal_pwd_audit" access="field" type="string"/>-->
+        <property name="hzihdn" length="100" column="hzihdn" access="field" type="string"/>
+        <property name="hzihprovince" length="50" column="hzihprovince" access="field" type="string"/>
+        <property name="hzihcity" length="50" column="hzihcity" access="field" type="string"/>
+        <property name="hzihorganization" length="50" column="hzihorganization" access="field" type="string"/>
+        <property name="hzihinstitutions" length="50" column="hzihinstitutions" access="field" type="string"/>
+        <property name="hzihcastatus" length="50" column="hzihcastatus" access="field" type="string"/>
+        <property name="hzihparentca" length="50" column="hzihparentca" access="field" type="string"/>
+        <property name="status" length="10" column="status" access="field" type="int"/>
+        <property name="hzihcertificatetype" length="50" column="hzihcertificatetype" access="field" type="string"/>
+        <property name="hzihcavalidity" length="50" column="hzihcavalidity" access="field" type="string"/>
+        <property name="logindate" column="logindate" access="field" type="java.util.Date"/>
+        <property name="createdate" column="createdate" access="field" type="java.util.Date"/>
+        <property name="onlinetime" column="onlinetime" access="field" type="java.util.Date"/>
+        <property name="on" column="online" access="field" length="4" type="int"/>
+        <property name="user_ip" column="user_ip" access="field" length="50" type="string"/>
+        <property name="vpn_ip" column="vpn_ip" access="field" length="50" type="string"/>
+        <property name="viewFlag" column="view_flag" access="field" type="int"/>
+        <!--<property name="location" column="location_flag" access="field" type="int"/>-->
+        <!--<property name="locationstr" column="location" access="field"  length="50" type="string"/>-->
+    </class>
+</hibernate-mapping>

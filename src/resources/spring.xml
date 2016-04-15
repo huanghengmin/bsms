@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+                           http://www.springframework.org/schema/aop 
+                           http://www.springframework.org/schema/aop/spring-aop-2.0.xsd 
+                           http://www.springframework.org/schema/tx 
+                           http://www.springframework.org/schema/tx/spring-tx-2.0.xsd ">
+    <!-- load properties from file -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:/config.properties</value>
+		</property>
+	</bean>
+
+	<!-- ///////////////// 数据库持久层配置 /////////////////// -->
+	<!--<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">-->
+		<!--<property name="jndiName" value="java:comp/env/${jndiName}"></property>-->
+	<!--</bean>-->
+
+    <!-- ///////////////// 数据库持久层配置 /////////////////// -->
+    <!--<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">-->
+    <!--<property name="jndiName" value="java:comp/env/${jndiName}"></property>-->
+    <!--</bean>-->
+    <bean id="dataSource"
+          class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close">
+        <property name="driverClass">
+            <value>${jdbc.driverClass}</value>
+        </property>
+        <property name="jdbcUrl">
+            <value>${jdbc.url}</value>
+        </property>
+        <property name="user">
+            <value>${jdbc.user}</value>
+        </property>
+        <property name="password">
+            <value>${jdbc.password}</value>
+        </property>
+        <!--连接池中保留的最小连接数。-->
+        <property name="minPoolSize" value="10" />
+        <!--连接池中保留的最大连接数。Default: 15 -->
+        <property name="maxPoolSize" value="30" />
+        <!--最大空闲时间,1800秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 -->
+        <property name="maxIdleTime" value="1800" />
+        <!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->
+        <property name="acquireIncrement" value="3" />
+        <property name="maxStatements" value="0" />
+        <property name="initialPoolSize" value="3" />
+        <!--每60秒检查所有连接池中的空闲连接。Default: 0 -->
+        <property name="idleConnectionTestPeriod" value="60" />
+        <!--定义在从数据库获取新连接失败后重复尝试的次数。Default: 30 -->
+        <property name="acquireRetryAttempts" value="30" />
+        <property name="breakAfterAcquireFailure" value="true" />
+        <property name="testConnectionOnCheckout" value="false" />
+    </bean>
+
+    <!--Hibernate SessionFatory-->
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+        <property name="configLocations">
+            <list>
+                <value>classpath:hibernate.cfg.xml</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.generate_statistics">true</prop>
+                <prop key="hibernate.connection.release_mode">auto</prop>
+                <prop key="hibernate.autoReconnect">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="cache.use_query_cache">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--Hibernate TransactionManager--><!-- 事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory">
+            <ref local="sessionFactory" />
+        </property>
+    </bean>
+    <!--   配置事务拦截器-->
+    <bean id="transactionalTemplate" abstract="true" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="new*">PROPAGATION_REQUIRED</prop>
+				<prop key="add*">PROPAGATION_REQUIRED</prop>
+				<prop key="bind*">PROPAGATION_REQUIRED</prop>
+				<prop key="cancel*">PROPAGATION_REQUIRED</prop>
+				<prop key="change*">PROPAGATION_REQUIRED</prop>
+				<prop key="check*">PROPAGATION_REQUIRED</prop>
+				<prop key="del*">PROPAGATION_REQUIRED</prop>
+				<prop key="edit*">PROPAGATION_REQUIRED</prop>
+				<prop key="find*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="is*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="insert">PROPAGATION_REQUIRED</prop>
+				<prop key="list*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="merge*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="next*">PROPAGATION_REQUIRED</prop>
+				<prop key="upload*">PROPAGATION_REQUIRED</prop>
+				<prop key="upd*">PROPAGATION_REQUIRED</prop>
+				<prop key="unbind*">PROPAGATION_REQUIRED</prop>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+				<prop key="build*">PROPAGATION_REQUIRED</prop>
+				<prop key="search*">PROPAGATION_REQUIRED,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+
+    <bean id="autoBeanNameProxyCreator" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+        <property name="beanNames">
+            <list>
+                <value>*DAO</value>
+                <value>gotoPage</value>
+                <value>find</value>
+            </list>
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <idref local="transactionalTemplate" />
+            </list>
+        </property>
+
+        <!-- 这里的配置是必须的，否则无法完成代理的类型转化 这是使用CGLIB来生成代理 -->
+        <property name="proxyTargetClass" value="true"/>
+    </bean>
+
+	<!--dao-->
+
+	<bean id="daoTemplate" abstract="true" class="cn.collin.commons.dao.MyDaoSupport">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+    <bean id="accountDao" class="com.hzih.bsms.dao.impl.AccountDaoImpl" parent="daoTemplate" />
+	<bean id="roleDao" class="com.hzih.bsms.dao.impl.RoleDaoImpl" parent="daoTemplate" />
+	<bean id="businessLogDao" class="com.hzih.bsms.dao.impl.BusinessLogDaoImpl" parent="daoTemplate" />
+	<bean id="safePolicyDao" class="com.hzih.bsms.dao.impl.SafePolicyDaoImpl" parent="daoTemplate" />
+	<bean id="sysLogDao" class="com.hzih.bsms.dao.impl.SysLogDaoImpl" parent="daoTemplate" />
+	<bean id="userOperLogDao" class="com.hzih.bsms.dao.impl.UserOperLogDaoImpl" parent="daoTemplate" />
+	<bean id="permissionDao" class="com.hzih.bsms.dao.impl.PermissionDaoImpl" parent="daoTemplate" />
+    <bean id="userManageDao" class="com.hzih.bsms.dao.impl.UserManageDaoImpl" parent="daoTemplate"/>
+    <bean id="roleManageDao" class="com.hzih.bsms.dao.impl.RoleManageDaoImpl" parent="daoTemplate"/>
+    <bean id="roleManageAndTimeDao" class="com.hzih.bsms.dao.impl.RoleManageAndTimeDaoImpl" parent="daoTemplate"/>
+    <bean id="roleUserDao" class="com.hzih.bsms.dao.impl.RoleUserDaoImpl" parent="daoTemplate"/>
+    <bean id="resourceDao" class="com.hzih.bsms.dao.impl.ResourceDaoImpl" parent="daoTemplate"/>
+    <bean id="resourceIpDao" class="com.hzih.bsms.dao.impl.ResourceIpDaoImpl" parent="daoTemplate"/>
+    <bean id="resourceWebDao" class="com.hzih.bsms.dao.impl.ResourceWebDaoImpl" parent="daoTemplate"/>
+    <bean id="powerDao" class="com.hzih.bsms.dao.impl.PowerDaoImpl" parent="daoTemplate"/>
+    <bean id="wapControlDao" class="com.hzih.bsms.dao.impl.WapControlDaoImpl" parent="daoTemplate"/>
+    <bean id="processDao" class="com.hzih.bsms.cs.ProcessDaoImpl" parent="daoTemplate"/>
+
+    <!--permission-->
+    <bean id="caUserDao" class="com.hzih.bsms.dao.impl.CaUserDaoImpl" parent="daoTemplate"/>
+    <bean id="caRoleDao" class="com.hzih.bsms.dao.impl.CaRoleDaoImpl" parent="daoTemplate"/>
+    <bean id="caPermissionDao" class="com.hzih.bsms.dao.impl.CaPermissionDaoImpl" parent="daoTemplate"/>
+    <bean id="ipSourceDao" class="com.hzih.bsms.dao.impl.IPSourceDaoImpl" parent="daoTemplate"/>
+    <bean id="caRolePermissionDao" class="com.hzih.bsms.dao.impl.CaRolePermissionDaoImpl" parent="daoTemplate"/>
+    <bean id="caUserRoleDao" class="com.hzih.bsms.dao.impl.CaUserRoleDaoImpl" parent="daoTemplate"/>
+    <bean id="blackListDao" class="com.hzih.bsms.dao.impl.BlackListDaoImpl" parent="daoTemplate"/>
+    <bean id="whiteListDao" class="com.hzih.bsms.dao.impl.WhiteListDaoImpl" parent="daoTemplate"/>
+
+
+    <!--<bean id="httpDao" class="com.hzih.bsms.dao.impl.HttpDaoImpl" parent="daoTemplate"/>-->
+    <bean id="httpsDao" class="com.hzih.bsms.dao.impl.HttpsDaoImpl" parent="daoTemplate"/>
+    <bean id="siteDao" class="com.hzih.bsms.dao.impl.SiteDaoImpl" parent="daoTemplate"/>
+
+    <!-- services -->
+
+	<bean id="logService"  class="com.hzih.bsms.service.impl.LogServiceImpl">
+        <property name="sysLogDao" ref="sysLogDao" />
+        <property name="userOperLogDao" ref="userOperLogDao" />
+        <property name="businessLogDao" ref="businessLogDao" />
+	</bean>
+
+	<bean id="loginService" class="com.hzih.bsms.service.impl.LoginServiceImpl">
+	    <property name="accountDao" ref="accountDao" />
+	</bean>
+
+    <bean id="safePolicyService" class="com.hzih.bsms.service.impl.SafePolicyServiceImpl">
+        <property name="safePolicyDao" ref="safePolicyDao" />
+    </bean>
+
+    <bean id="roleService" class="com.hzih.bsms.service.impl.RoleServiceImpl">
+        <property name="roleDao" ref="roleDao" />
+        <property name="permissionDao" ref="permissionDao" />
+    </bean>
+
+    <bean id="accountService" class="com.hzih.bsms.service.impl.AccountServiceImpl">
+        <property name="accountDao" ref="accountDao"/>
+        <property name="roleDao" ref="roleDao"/>
+    </bean>
+
+    <bean id="auditService" class="com.hzih.bsms.service.impl.AuditServiceImpl">
+        <property name="businessLogDao" ref="businessLogDao"/>
+        <property name="sysLogDao" ref="sysLogDao"/>
+        <property name="userOperLogDao" ref="userOperLogDao"/>
+    </bean>
+
+    <bean id="userManageService" class="com.hzih.bsms.service.impl.UserManageServiceImpl">
+        <property name="userManageDao" ref="userManageDao"/>
+        <property name="roleUserDao" ref="roleUserDao"/>
+    </bean>
+
+    <bean id="roleManageService" class="com.hzih.bsms.service.impl.RoleManageServiceImpl">
+        <property name="roleManageDao" ref="roleManageDao"/>
+        <property name="roleUserDao" ref="roleUserDao"/>
+        <property name="powerDao" ref="powerDao"/>
+    </bean>
+
+    <bean id="roleManageAndTimeService" class="com.hzih.bsms.service.impl.RoleManageAndTimeServiceImpl">
+        <property name="roleManageAndTimeDao" ref="roleManageAndTimeDao"/>
+    </bean>
+
+    <bean id="roleUserService" class="com.hzih.bsms.service.impl.RoleUserServiceImpl">
+        <property name="roleUserDao" ref="roleUserDao"/>
+    </bean>
+
+    <bean id="resourceService" class="com.hzih.bsms.service.impl.ResourceServiceImpl">
+        <property name="resourceDao" ref="resourceDao"/>
+        <property name="resourceIpDao" ref="resourceIpDao"/>
+        <property name="resourceWebDao" ref="resourceWebDao"/>
+        <property name="powerDao" ref="powerDao"/>
+    </bean>
+
+    <bean id="powerService" class="com.hzih.bsms.service.impl.PowerServiceImpl">
+        <property name="powerDao" ref="powerDao"/>
+        <property name="resourceDao" ref="resourceDao"/>
+        <property name="resourceIpDao" ref="resourceIpDao"/>
+        <property name="resourceWebDao" ref="resourceWebDao"/>
+    </bean>
+
+    <bean id="wapControlService" class="com.hzih.bsms.service.impl.WapControlServiceImpl">
+        <property name="wapControlDao" ref="wapControlDao"/>
+    </bean>
+
+
+    <bean id="caUserService" class="com.hzih.bsms.service.impl.CaUserServiceImpl">
+        <property name="caUserDao" ref="caUserDao"/>
+    </bean>
+
+    <bean id="caRoleService" class="com.hzih.bsms.service.impl.CaRoleServiceImpl">
+        <property name="caRoleDao" ref="caRoleDao"/>
+    </bean>
+
+    <bean id="caPermissionService" class="com.hzih.bsms.service.impl.CaPermissionServiceImpl">
+        <property name="caPermissionDao" ref="caPermissionDao"/>
+    </bean>
+
+    <bean id="caRolePermissionService" class="com.hzih.bsms.service.impl.CaRolePermissionServiceImpl">
+        <property name="caRolePermissionDao" ref="caRolePermissionDao"/>
+        <property name="caPermissionDao" ref="caPermissionDao"/>
+    </bean>
+
+    <bean id="ipSourceService" class="com.hzih.bsms.service.impl.IPSourceServiceImpl">
+        <property name="ipSourceDao" ref="ipSourceDao"/>
+    </bean>
+
+    <bean id="caUserRoleService" class="com.hzih.bsms.service.impl.CaUserRoleServiceImpl">
+        <property name="caUserRoleDao" ref="caUserRoleDao"/>
+        <property name="caUserDao" ref="caUserDao"/>
+    </bean>
+
+    <!--<bean id="accessAddressService" class="com.hzih.bsms.service.impl.AccessAddressServiceImpl">-->
+        <!--<property name="accessAddressDao" ref="accessAddressDao"/>-->
+    <!--</bean>-->
+
+    <bean id="blackListService" class="com.hzih.bsms.service.impl.BlackListServiceImpl">
+        <property name="blackListDao" ref="blackListDao"/>
+    </bean>
+
+    <bean id="whiteListService" class="com.hzih.bsms.service.impl.WhiteListServiceImpl">
+        <property name="whiteListDao" ref="whiteListDao"/>
+    </bean>
+
+    <!--<bean id="stopListService" class="com.hzih.ra.service.impl.StopListServiceImpl">-->
+        <!--<property name="stopListDao" ref="stopListDao"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="allowListService" class="com.hzih.ra.service.impl.AllowListServiceImpl">-->
+        <!--<property name="allowListDao" ref="allowListDao"/>-->
+    <!--</bean>-->
+
+    <!-- action  -->
+    <!--user-->
+    <bean id="AccountAction" class="com.hzih.bsms.web.action.user.AccountAction">
+        <property name="logService" ref="logService" />
+        <property name="accountService" ref="accountService"/>
+        <property name="safePolicyService" ref="safePolicyService"/>
+    </bean>
+
+    <bean id="loginAction" class="com.hzih.bsms.web.action.user.LoginAction">
+        <property name="loginService" ref="loginService" />
+        <property name="logService" ref="logService" />
+    </bean>
+
+    <bean id="logoutAction" class="com.hzih.bsms.web.action.user.LogoutAction">
+        <property name="logService" ref="logService" />
+    </bean>
+
+    <bean id="RoleAction" class="com.hzih.bsms.web.action.user.RoleAction">
+        <property name="roleService" ref="roleService"/>
+        <property name="logService" ref="logService" />
+    </bean>
+
+    <bean id="SafePolicyAction" class="com.hzih.bsms.web.action.user.SafePolicyAction">
+        <property name="logService" ref="logService" />
+        <property name="safePolicyService" ref="safePolicyService" />
+    </bean>
+    <!--net-->
+    <bean id="ConfigManagerAction" class="com.hzih.bsms.web.action.system.ConfigManagerAction">
+        <property name="logService" ref="logService" />
+    </bean>
+
+    <bean id="InterfaceManagerAction" class="com.hzih.bsms.web.action.net.InterfaceManagerAction">
+        <property name="logService" ref="logService" />
+    </bean>
+
+    <bean id="SecurityConfigAction" class="com.hzih.bsms.web.action.net.SecurityConfigAction">
+        <property name="logService" ref="logService" />
+    </bean>
+
+ <!--   <bean id="SaveInterfaceAction" class="com.hzih.bsms.web.action.net.SaveInterfaceAction">
+    </bean>-->
+
+    <!--system-->
+
+    <bean id="PlatformAction" class="com.hzih.bsms.web.action.system.PlatformAction">
+        <property name="logService" ref="logService" />
+    </bean>
+
+    <bean id="PlatformInitAction" class="com.hzih.bsms.web.action.system.PlatformInitAction">
+    </bean>
+
+    <bean id="LicenseAction" class="com.hzih.bsms.web.action.system.LicenseAction">
+        <property name="logService" ref="logService" />
+    </bean>
+
+    <bean id="DownLoadAction" class="com.hzih.bsms.web.action.system.DownLoadAction">
+        <property name="logService" ref="logService" />
+        <property name="loginService" ref="loginService"/>
+    </bean>
+
+    <bean  id="UpgradeAction" class="com.hzih.bsms.web.action.system.UpgradeAction">
+        <property name="logService" ref="logService" />
+    </bean>
+
+    <bean id="SysLogConfigAction" class="com.hzih.bsms.web.action.syslog.SysLogConfigAction">
+        <property name="logService" ref="logService" />
+    </bean>
+
+    <bean id="LdapConfigAction" class="com.hzih.bsms.web.action.ldap.LdapConfigAction">
+        <property name="logService" ref="logService" />
+    </bean>
+
+    <bean id="checkTimeoutAction" class="com.hzih.bsms.web.action.CheckTimeoutAction">
+        <property name="logService" ref="logService" />
+    </bean>
+
+    <bean id="AuditAction" class="com.hzih.bsms.web.action.audit.AuditAction">
+        <property name="logService" ref="logService" />
+        <property name="auditService" ref="auditService"/>
+    </bean>
+
+
+    <!--access-->
+    <bean id="UserManageAction" class="com.hzih.bsms.web.action.access.UserManageAction">
+        <property name="userManageService" ref="userManageService" />
+    </bean>
+
+    <bean id="RoleManageAction" class="com.hzih.bsms.web.action.access.RoleManageAction">
+        <property name="roleManageService" ref="roleManageService" />
+        <property name="roleManageAndTimeService" ref="roleManageAndTimeService"/>
+        <property name="userManageService" ref="userManageService" />
+        <property name="roleUserService" ref="roleUserService" />
+    </bean>
+
+    <bean id="ResourceAction" class="com.hzih.bsms.web.action.access.ResourceAction">
+        <property name="resourceService" ref="resourceService" />
+    </bean>
+
+    <bean id="PowerAction" class="com.hzih.bsms.web.action.access.PowerAction">
+        <property name="powerService" ref="powerService" />
+    </bean>
+
+    <!--serve-->
+    <bean id="AccessControlAction" class="com.hzih.bsms.web.action.serve.AccessControlAction">
+        <property name="wapControlService" ref="wapControlService" />
+    </bean>
+
+    <bean id="ServerParamsAction" class="com.hzih.bsms.web.action.serve.ServerParamsAction">
+    </bean>
+
+    <bean id="NginxServerStatusAction" class="com.hzih.bsms.web.action.serve.NginxServerStatusAction">
+    </bean>
+
+    <bean id="SquidServerStatusAction" class="com.hzih.bsms.web.action.serve.SquidServerStatusAction">
+    </bean>
+
+
+    <!--proxy-->
+    <bean id="ProxyCaAction" class="com.hzih.bsms.web.action.proxy.ProxyCaAction">
+    </bean>
+
+    <bean id="HttpsProxyAction" class="com.hzih.bsms.web.action.proxy.HttpsProxyAction">
+    </bean>
+
+    <bean id="ServeStatuxAction" class="com.hzih.bsms.web.action.proxy.ServeStatuxAction">
+    </bean>
+
+    <!--bs-->
+    <!--<bean id="BsManagerConfigAction" class="com.hzih.bsms.web.action.bs.BsManagerConfigAction">-->
+        <!--<property name="logService" ref="logService"/>-->
+        <!--<property name="httpsDao" ref="httpsDao"/>-->
+        <!--<property name="siteDao" ref="siteDao"/>-->
+    <!--</bean>-->
+
+    <bean id="BsManagerConfigAction" class="com.hzih.bsms.web.action.bs.BsProxyConfigAction">
+        <property name="logService" ref="logService"/>
+        <property name="httpsDao" ref="httpsDao"/>
+        <property name="siteDao" ref="siteDao"/>
+    </bean>
+
+    <bean id="BsReloadAction" class="com.hzih.bsms.web.action.bs.BsReloadAction">
+    </bean>
+
+    <bean id="BsAuthorAction" class="com.hzih.bsms.web.action.bs.BsAuthorAction">
+    </bean>
+
+    <!--<bean id="HttpAction" class="com.hzih.bsms.web.action.bs.HttpAction">-->
+        <!--<property name="httpDao" ref="httpDao"/>-->
+        <!--<property name="logService" ref="logService"/>-->
+    <!--</bean>-->
+
+    <bean id="HttpsAction" class="com.hzih.bsms.web.action.bs.HttpsAction">
+        <property name="httpsDao" ref="httpsDao"/>
+        <property name="logService" ref="logService"/>
+    </bean>
+
+    <bean id="ProcessAction" class="com.hzih.bsms.web.action.cs.ProcessAction">
+        <property name="processDao" ref="processDao"/>
+        <property name="logService" ref="logService"/>
+    </bean>
+
+    <bean id="SiteAction" class="com.hzih.bsms.web.action.bs.SiteAction">
+        <property name="siteDao" ref="siteDao"/>
+        <property name="logService" ref="logService"/>
+        <property name="httpsDao" ref="httpsDao"/>
+    </bean>
+
+    <!--ra-->
+    <bean id="NginxAccessLogAction" class="com.hzih.bsms.web.action.ra.NginxAccessLogAction">
+    </bean>
+    <bean id="ControlAccessAction" class="com.hzih.bsms.web.action.ra.ControlAccessAction">
+    </bean>
+
+    <bean id="DownLoadNginxLogAction" class="com.hzih.bsms.web.action.ra.DownLoadNginxLogAction">
+        <property name="logService" ref="logService"/>
+        <property name="loginService" ref="loginService"/>
+    </bean>
+
+    <bean id="BsProxy" class="com.hzih.bsms.web.action.proxy_address.BsProxy">
+    </bean>
+
+    <!--permission-->
+
+    <bean id="CaUserAction" class="com.hzih.bsms.web.action.permission.CaUserAction">
+        <property name="logService" ref="logService" />
+        <property name="caUserService" ref="caUserService"/>
+        <property name="caUserRoleService" ref="caUserRoleService"/>
+    </bean>
+
+    <bean id="CaRoleAction" class="com.hzih.bsms.web.action.permission.CaRoleAction">
+        <property name="logService" ref="logService" />
+        <property name="caRoleService" ref="caRoleService"/>
+        <property name="caUserRoleService" ref="caUserRoleService"/>
+        <property name="caRolePermissionService" ref="caRolePermissionService"/>
+    </bean>
+
+    <bean id="CaPermissionAction" class="com.hzih.bsms.web.action.permission.CaPermissionAction">
+        <property name="logService" ref="logService" />
+        <property name="caPermissionService" ref="caPermissionService"/>
+        <property name="caRolePermissionService" ref="caRolePermissionService"/>
+    </bean>
+
+    <bean id="IPSourceAction" class="com.hzih.bsms.web.action.permission.IPSourceAction">
+        <property name="logService" ref="logService" />
+        <property name="ipSourceService" ref="ipSourceService"/>
+    </bean>
+
+    <bean id="CaRolePermissionAction" class="com.hzih.bsms.web.action.permission.CaRolePermissionAction">
+        <property name="caRolePermissionService" ref="caRolePermissionService"/>
+        <property name="caPermissionDao" ref="caPermissionDao"/>
+    </bean>
+
+    <bean id="CaRoleUserAction" class="com.hzih.bsms.web.action.permission.CaRoleUserAction">
+        <property name="caUserRoleService" ref="caUserRoleService"/>
+        <property name="caUserDao" ref="caUserDao"/>
+    </bean>
+
+    <bean id="BlackListAction" class="com.hzih.bsms.web.action.permission.BlackListAction">
+        <property name="logService" ref="logService" />
+        <property name="blackListService" ref="blackListService"/>
+    </bean>
+
+    <bean id="WhiteListAction" class="com.hzih.bsms.web.action.permission.WhiteListAction">
+        <property name="logService" ref="logService" />
+        <property name="whiteListService" ref="whiteListService"/>
+    </bean>
+
+    <bean id="ImportRaUserAction" class="com.hzih.bsms.web.action.ra.ImportRaUserAction">
+        <property name="caUserService" ref="caUserService"/>
+    </bean>
+
+
+    <bean id="RaConfig" class="com.hzih.bsms.web.action.ra.RaConfig">
+    </bean>
+
+    <bean id="AccessControl" class="com.hzih.bsms.web.action.openvpn.AccessControl">
+    <property name="caUserService" ref="caUserService"/>
+    </bean>
+
+    <bean id="UploadSquidACLFile" class="com.hzih.bsms.web.action.acl.UploadSquidACLFile">
+    </bean>
+
+    <bean id="MonitorAction" class="com.hzih.bsms.web.action.monitor.MonitorAction">
+        <property name="logService" ref="logService" />
+    </bean>
+
+</beans>

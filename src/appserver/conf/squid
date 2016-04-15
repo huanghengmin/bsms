@@ -1,0 +1,32 @@
+#这是一个代理多个https 站点的例子，很不错
+############################################
+#说明：Squid Configuration File
+#This configuration MUST appear at the top of squid.conf above any other forward-proxy configuration (http_access etc). Otherwise the standard proxy access rules block some people viewing the accelerated site.
+###配置开始
+
+https_port 443 cert=/usr/app/bs/ssl/User.cert key=/usr/app/bs/ssl/User.key defaultsite=www.proxy.com vhost
+
+# First HTTPS peer 第一个站点配置
+cache_peer 192.168.1.115 parent 80 0 no-query originserver login=PASS name=website_one
+
+acl sites_server_one dstdomain www.website_one.com
+cache_peer_access website_one allow sites_server_one
+http_access allow sites_server_one
+
+# Second HTTPS peer 第二个站点配置,代理本机服务
+cache_peer 192.168.1.105 parent 80 0 no-query originserver login=PASS name=website_self
+
+acl sites_server_two dstdomain www.proxy.com
+cache_peer_access website_self allow sites_server_two
+http_access allow sites_server_two
+
+# Third HTTPS peer 第三个站点配置
+cache_peer 192.168.1.125 parent 443 0 no-query originserver ssl sslflags=DONT_VERIFY_PEER name=website_third
+
+acl sites_server_third dstdomain www.website_third.com
+cache_peer_access website_third allow sites_server_third
+http_access allow sites_server_third
+
+# Security block for non-hosted sites 允许所有地址访问
+http_access deny all
+############################################
