@@ -76,7 +76,8 @@ public class UploadSquidACLFile extends ActionSupport {
         Proc proc = new Proc();
 //        proc.exec("sh "+StringContext.systemPath+"/bsshell/reload_squid.sh");
         proc.exec("service squid status");
-        if(proc.getErrorOutput().contains("No running copy")){
+//        if(proc.getErrorOutput().contains("No running copy")){
+        if(!proc.getErrorOutput().contains("running")) {
             proc.exec("service squid start");
         } else {
             proc.exec("service squid reload");
