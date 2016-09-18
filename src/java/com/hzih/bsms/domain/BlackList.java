@@ -8,6 +8,16 @@ package com.hzih.bsms.domain;
  * To change this template use File | Settings | File Templates.
  */
 public class BlackList {
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     private String url;
 //    private int status;
 
@@ -31,12 +41,12 @@ public class BlackList {
         return url;
     }
 
-    @Override
+   /* @Override
     public String toString() {
         return "BlackList{" +
                 "url='" + url + '\'' +
                 '}';
-    }
+    }*/
 
     public void setUrl(String url) {
         this.url = url;
@@ -46,6 +56,17 @@ public class BlackList {
 //        this.url = url;
 //        this.status = status;
 //    }
+
+
+    public BlackList(int id) {
+        this.id = id;
+    }
+
+    public BlackList(int id, String url) {
+
+        this.id = id;
+        this.url = url;
+    }
 
     public BlackList() {
 

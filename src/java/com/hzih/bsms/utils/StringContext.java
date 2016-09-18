@@ -19,7 +19,8 @@ public class StringContext {
 
     public final static String squidPath = "/usr/local/squid";
     public final static String acl_path = squidPath+"/etc/blackwhite.conf";
-    
+//    public final static String acl_path = systemPath+"/blackwhite.conf";
+
     public final static String bsps_tcp_config = systemPath+"/config/tcp.conf";
 //    public final static String bsps_nginx_config = systemPath+"/config/bsPx.conf";
 //    public final static String bsps_t_http_config = systemPath+"/config/config.conf";

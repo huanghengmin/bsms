@@ -29,13 +29,13 @@ public class SquidServerStatusAction extends ActionSupport {
             proc.exec("service squid start");
             Thread.sleep(1000*2);
             proc.exec("service squid status");
-//            String msg_on = proc.getErrorOutput();
-            String output = proc.getOutput();
+            String msg_on = proc.getOutput();
 //            logger.info(msg_on);
-            if(!output.contains("running")) {
-                msg = "0";
-            }else {
+//            if(msg_on.contains("No running copy")) {
+                if (msg_on.contains("is running")) {
                 msg = "1";
+            }else {
+                msg = "0";
             }
         } catch (Exception e) {
             msg = "0";
@@ -54,17 +54,15 @@ public class SquidServerStatusAction extends ActionSupport {
         try {
             Proc proc= new Proc();
             proc.exec("service squid stop");
-            Thread.sleep(1000*5);
+            Thread.sleep(1000*15);
             proc.exec("service squid status");
-//            String msg_on = proc.getErrorOutput();
+            String msg_on = proc.getOutput();
 //            logger.info(msg_on);
-            String output = proc.getOutput();
-//            logger.info("output"+output);
 //            if(msg_on.contains("No running copy")) {
-            if(!output.contains("running")) {
-                msg = "0";
-            }else {
+                if (msg_on.contains("is running")) {
                 msg = "1";
+            }else {
+                msg = "0";
             }
         } catch (Exception e) {
             msg = "0";
@@ -83,15 +81,14 @@ public class SquidServerStatusAction extends ActionSupport {
         try{
             Proc proc = new Proc();
             proc.exec("service squid status");
-//            String msg_on = proc.getErrorOutput();
-//            logger.info(msg_on);
-            String output = proc.getOutput();
-//            logger.info("output"+output);
+            String msg_on = proc.getOutput();
+//            logger.info("error_output:"+msg_on);
+//            logger.info("output:"+ proc.getOutput());
 //            if(msg_on.contains("No running copy")) {
-            if(!output.contains("running")) {
-                msg = "0";
-            }else {
+            if (msg_on.contains("is running")) {
                 msg = "1";
+            }else {
+                msg = "0";
             }
         } catch (Exception e){
             msg = "0";
@@ -110,18 +107,16 @@ public class SquidServerStatusAction extends ActionSupport {
         try{
             Proc proc= new Proc();
             proc.exec("service squid restart");
-            Thread.sleep(1000*5);
+            Thread.sleep(1000*15);
             try{
                 proc.exec("service squid status");
-//                String msg_on = proc.getErrorOutput();
+                String msg_on = proc.getOutput();
 //                logger.info(msg_on);
-                String output = proc.getOutput();
-//                logger.info("output"+output);
 //                if(msg_on.contains("No running copy")) {
-                if(!output.contains("running")) {
-                    msg = "0";
-                }else {
+                if (msg_on.contains("is running")) {
                     msg = "1";
+                }else {
+                    msg = "0";
                 }
             } catch (Exception e){
                 msg = "0";
@@ -134,5 +129,3 @@ public class SquidServerStatusAction extends ActionSupport {
         return null;
     }
 }
-
-

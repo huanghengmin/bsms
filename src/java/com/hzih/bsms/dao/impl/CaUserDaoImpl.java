@@ -23,7 +23,7 @@ public class CaUserDaoImpl extends MyDaoSupport implements CaUserDao {
     public void setEntityClass() {
         this.entityClass = Permission.class;
     }
-    @Override
+    /*@Override
     public boolean sleepRaUser(CaUser caUser) throws Exception {
         boolean flag =false;
         String s ="update CaUser caUser set caUser.status = "+caUser.getStatus()+" where caUser.id = "+caUser.getId();
@@ -80,11 +80,11 @@ public class CaUserDaoImpl extends MyDaoSupport implements CaUserDao {
             session.close();
         }
         return flag;
-    }
+    }*/
 
     @Override
     public CaUser findBySerialNumber(String serialNumber) throws Exception {
-        String hql="from CaUser caUser where caUser.hzihcaserialNumber ='"+serialNumber+"'";
+        String hql="from CaUser caUser where caUser.serialNumber ='"+serialNumber+"'";
         List<CaUser> caUsers  = super.getHibernateTemplate().find(hql);
         if(caUsers.size()>0&&caUsers!=null){
             return caUsers.get(0);
@@ -101,7 +101,7 @@ public class CaUserDaoImpl extends MyDaoSupport implements CaUserDao {
         return flag;
     }
 
-    @Override
+  /*  @Override
     public boolean updateCaStatus(CaUser caUser) throws Exception {
         boolean flag =false;
         String hql="update from CaUser causer set causer.hzihcastatus = '"+caUser.getHzihcastatus()+"' where id = "+caUser.getId();
@@ -118,7 +118,7 @@ public class CaUserDaoImpl extends MyDaoSupport implements CaUserDao {
             session.close();
         }
         return flag;
-    }
+    }*/
 
     @Override
     public boolean modify(CaUser caUser) throws Exception {
@@ -126,7 +126,11 @@ public class CaUserDaoImpl extends MyDaoSupport implements CaUserDao {
         CaUser ca_u = findById(caUser.getId());
         if(null!=caUser.getCn())
             ca_u.setCn(caUser.getCn());
-        if(null!=caUser.getHzihpassword())
+        if(null!=caUser.getSerialNumber())
+            ca_u.setSerialNumber(caUser.getSerialNumber());
+        if(null!=caUser.getIpAddress())
+            ca_u.setIpAddress(caUser.getIpAddress());
+        /*if(null!=caUser.getHzihpassword())
             ca_u.setHzihpassword(caUser.getHzihpassword());
         if(null!=caUser.getHzihid())
             ca_u.setHzihid(caUser.getHzihid());
@@ -169,7 +173,7 @@ public class CaUserDaoImpl extends MyDaoSupport implements CaUserDao {
         if(null!=caUser.getLogindate())
             ca_u.setLogindate(caUser.getLogindate());
         if(caUser.getViewFlag()!=-1)
-            ca_u.setViewFlag(caUser.getViewFlag());
+            ca_u.setViewFlag(caUser.getViewFlag());*/
         super.getHibernateTemplate().update(ca_u);
         flag = true;
         return flag;
@@ -194,19 +198,19 @@ public class CaUserDaoImpl extends MyDaoSupport implements CaUserDao {
     }
 
     @Override
-    public PageResult findByPages(String username,String userid,String phone,String email,String status ,String on,int start,int limit) throws Exception {
+    public PageResult findByPages(String username,/*String userid,String phone,String email,String status ,String on,*/int start,int limit) throws Exception {
         int pageIndex = start/limit+1;
         String hql = " from CaUser s where 1=1";
         List paramsList = new ArrayList();
-        if (userid != null && userid.length() > 0) {
+       /* if (userid != null && userid.length() > 0) {
             hql += " and hzihid like ?";
             paramsList.add("%" + userid + "%");
-        }
+        }*/
         if (username != null && username.length() > 0) {
             hql += " and cn like ?";
             paramsList.add("%" + username + "%");
         }
-        if (phone != null && phone.length() > 0) {
+        /*if (phone != null && phone.length() > 0) {
             hql += " and hzihphone like ?";
             paramsList.add("%" + phone + "%");
         }
@@ -221,7 +225,7 @@ public class CaUserDaoImpl extends MyDaoSupport implements CaUserDao {
         if(null!=on && on.length() > 0){
             hql += " and online=?";
             paramsList.add(Integer.parseInt(on));
-        }
+        }*/
         String countHql = "select count(*) " + hql;
 
         PageResult ps = this.findByPage(hql, countHql, paramsList.toArray(),
@@ -253,7 +257,7 @@ public class CaUserDaoImpl extends MyDaoSupport implements CaUserDao {
 
     @Override
     public CaUser findByHost(String host) {
-        String hql = new String("from CaUser where vpn_ip = ?");
+        String hql = new String("from CaUser caUser where caUser.ipAddress = ?");
         List<CaUser> list = getHibernateTemplate().find(hql,new String[] { host });
         if (list != null && list.size() > 0) {
             return list.get(0);

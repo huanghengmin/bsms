@@ -55,7 +55,7 @@ public class CaUserServiceImpl implements CaUserService {
     }
 
 
-    @Override
+/*    @Override
     public boolean reCastRaUser(CaUser raUser) throws Exception {
         return caUserDao.reCastRaUser(raUser);
     }
@@ -68,7 +68,7 @@ public class CaUserServiceImpl implements CaUserService {
     @Override
     public boolean sleepRaUser(CaUser raUser) throws Exception {
         return caUserDao.sleepRaUser(raUser);
-    }
+    }*/
 
     @Override
     public CaUser findById(int id) throws Exception {
@@ -76,19 +76,19 @@ public class CaUserServiceImpl implements CaUserService {
     }
 
     @Override
-    public PageResult findByPages(String username,String userid,String phone,String email,String status ,String on,int start, int limit) throws Exception {
-        return caUserDao.findByPages(username, userid, phone, email, status,on,start,limit);
+    public PageResult findByPages(String username,/*String userid,String phone,String email,String status ,String on,*/int start, int limit) throws Exception {
+        return caUserDao.findByPages(username,/* userid, phone, email, status,on,*/start,limit);
     }
 
     @Override
     public CaUser findByCn(String cn) throws Exception {
         return caUserDao.findByCn(cn);
     }
-
+/*
     @Override
     public boolean updateCaStatus(CaUser caUser) throws Exception {
         return caUserDao.updateCaStatus(caUser);
-    }
+    }*/
 
     @Override
     public boolean update(CaUser caUser) throws Exception {

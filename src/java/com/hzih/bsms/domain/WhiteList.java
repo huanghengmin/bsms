@@ -8,6 +8,16 @@ package com.hzih.bsms.domain;
  * To change this template use File | Settings | File Templates.
  */
 public class WhiteList {
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     private String url;
 //    private int status;
 
@@ -32,12 +42,12 @@ public class WhiteList {
 //                '}';
 //    }
 
-    @Override
+    /*@Override
     public String toString() {
         return "WhiteList{" +
                 "url='" + url + '\'' +
                 '}';
-    }
+    }*/
 
     public String getUrl() {
         return url;
@@ -49,6 +59,16 @@ public class WhiteList {
 
     public WhiteList() {
 
+    }
+
+    public WhiteList(int id, String url) {
+        this.id = id;
+        this.url = url;
+    }
+
+    public WhiteList(int id) {
+
+        this.id = id;
     }
 
     public WhiteList(String url) {

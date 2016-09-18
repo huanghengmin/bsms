@@ -24,19 +24,19 @@ public interface CaUserService {
 
     public void delete(int id) throws Exception;
 
-    public boolean reCastRaUser(CaUser raUser)throws Exception;
+    /*public boolean reCastRaUser(CaUser raUser)throws Exception;
 
     public boolean stopRaUser(CaUser raUser)throws Exception;
 
-    public boolean sleepRaUser(CaUser raUser)throws Exception;
+    public boolean sleepRaUser(CaUser raUser)throws Exception;*/
 
     public CaUser findById(int id)throws Exception;
 
-    public PageResult findByPages(String username,String userid,String phone,String email,String status ,String on, int start, int limit)throws Exception;
+    public PageResult findByPages(String username,/*String userid,String phone,String email,String status ,String on,*/ int start, int limit)throws Exception;
     
     public CaUser findByCn(String cn)throws Exception;
 
-    boolean updateCaStatus(CaUser caUser) throws Exception;
+   /* boolean updateCaStatus(CaUser caUser) throws Exception;*/
 
     boolean update(CaUser caUser)throws Exception;
 }

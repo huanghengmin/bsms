@@ -21,7 +21,7 @@ public class ClientDao extends BaseHibernateDAO {
     private Logger logger = Logger.getLogger(ClientDao.class);
 
     public CaUser findBySerialNumber(String serialNumber) throws Exception {
-        String hql=" from CaUser caUser where caUser.hzihcaserialNumber ='"+serialNumber+"'";
+        String hql=" from CaUser caUser where caUser.serialNumber ='"+serialNumber+"'";
         Session session = getSession();
         ArrayList<CaUser> list = (ArrayList<CaUser>) session.createQuery(hql).list();
         session.close();
@@ -50,23 +50,26 @@ public class ClientDao extends BaseHibernateDAO {
                         on = Integer.parseInt(log.getOn());
                     }catch (Exception e){
                 }
-                temp.setOn(on);
-                temp.setUser_ip(log.getUserip());
-                temp.setVpn_ip(log.getVpnip());
+                temp.setSerialNumber(log.getSerial());
+                temp.setIpAddress(log.getIp());
+//                temp.setOn(on);
+//                temp.setUser_ip(log.getUserip());
+//                temp.setVpn_ip(log.getVpnip());
                 if(1==on){
-                    if(null!=online_date){
+                    /*if(null!=online_date){
                         temp.setLogindate(online_date);
                         temp.setOnlinetime(online_date);
 
-                    }
+                    }*/
+
                     session.getTransaction().begin();
                     session.update(temp);
                     session.getTransaction().commit();
                     session.close();
                     logger.info("更新用户:"+log.getUsername()+"上线信息成功!");
                 }else {
-                    if(null!=online_date)
-                        temp.setOnlinetime(online_date);
+              /*      if(null!=online_date)
+                        temp.setOnlinetime(online_date);*/
                     session.getTransaction().begin();
                     session.update(temp);
                     session.getTransaction().commit();

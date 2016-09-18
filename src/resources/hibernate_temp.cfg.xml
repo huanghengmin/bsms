@@ -36,7 +36,7 @@
     <mapping resource="com/hzih/bsms/domain/xml/CaUser.hbm.xml" />
     <mapping resource="com/hzih/bsms/domain/xml/CaRole.hbm.xml" />
     <mapping resource="com/hzih/bsms/domain/xml/CaPermission.hbm.xml" />
-    <mapping resource="com/hzih/bsms/domain/xml/IPSource.hbm.xml" />
+    <!--<mapping resource="com/hzih/bsms/domain/xml/IPSource.hbm.xml" />-->
     <mapping resource="com/hzih/bsms/domain/xml/CaUserRole.hbm.xml" />
     <mapping resource="com/hzih/bsms/domain/xml/CaRolePermission.hbm.xml" />
 

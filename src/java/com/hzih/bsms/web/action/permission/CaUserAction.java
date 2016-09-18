@@ -89,7 +89,7 @@ public class CaUserAction extends ActionSupport {
         this.caUser = caUser;
     }
 
-    public String sleepRaUser() throws Exception {
+  /*  public String sleepRaUser() throws Exception {
         HttpServletRequest request = ServletActionContext.getRequest();
         HttpServletResponse response = ServletActionContext.getResponse();
         ActionBase actionBase = new ActionBase();
@@ -133,7 +133,7 @@ public class CaUserAction extends ActionSupport {
         boolean flag = caUserService.reCastRaUser(delCaUser);
         if (flag) {
             logService.newLog("INFO", SessionUtils.getAccount(request).getUserName(), "CaUser", "恢复接入成功！");
-       /*     CaUser caUser1 =caUserService.findById(Integer.parseInt(id));
+       *//*     CaUser caUser1 =caUserService.findById(Integer.parseInt(id));
             String[][] vpn_params = new String[][] {
                     {"username",caUser1.getCn()},
                     {"serial",caUser1.getHzihcaserialNumber()}
@@ -142,7 +142,7 @@ public class CaUserAction extends ActionSupport {
             if(null!=response_string&&response_string.contains("true")){
                 logger.info("恢复接入成功");
                 json = "{success:true}";
-            }*/
+            }*//*
 //            json = "{success:true}";
         } else {
             logger.info("恢复接入失败");
@@ -166,7 +166,7 @@ public class CaUserAction extends ActionSupport {
         if (flag) {
 
             logService.newLog("INFO", SessionUtils.getAccount(request).getUserName(), "CaUser", "长久阻断成功！");
-           /* CaUser caUser1 =caUserService.findById(Integer.parseInt(id));
+           *//* CaUser caUser1 =caUserService.findById(Integer.parseInt(id));
             String[][] vpn_params = new String[][] {
                     {"username",caUser1.getCn()},
                     {"serial",caUser1.getHzihcaserialNumber()}
@@ -176,14 +176,14 @@ public class CaUserAction extends ActionSupport {
                 logger.info("长久阻断成功");
 
                 json = "{success:true}";
-            }*/
+            }*//*
         } else {
             logger.info("长久阻断失败");
             logService.newLog("ERROR", SessionUtils.getAccount(request).getUserName(), "CaUser", "长久阻断失败！");
         }
         actionBase.actionEnd(response, json, result);
         return null;
-    }
+    }*/
 
     public String add() throws Exception {
         HttpServletRequest request = ServletActionContext.getRequest();
@@ -270,27 +270,29 @@ public class CaUserAction extends ActionSupport {
             json += "{" +
                     "id:'"+ checkValue(log.getId())+
                     "',cn:'" +  checkValue(log.getCn()) +
-                    "',hzihpassword:'" +  checkValue(log.getHzihpassword()) +
-                    "',hzihid:'" +  checkValue(log.getHzihid()) +
-                    "',hzihphone:'" +  checkValue(log.getHzihphone()) +
-                    "',hzihaddress:'" +  checkValue(log.getHzihaddress()) +
-                    "',hzihemail:'" +  checkValue(log.getHzihemail()) +
-                    "',hzihjobnumber:'" +  checkValue(log.getHzihjobnumber()) +
-                    "',phonenetid:'" +  checkValue(log.getPhonenetid()) +
-                    "',hzihcaserialNumber:'" +  checkValue(log.getHzihcaserialNumber()) +
-                    "',terminalid:'" +  checkValue(log.getTerminalid()) +
+//                    "',hzihpassword:'" +  checkValue(log.getHzihpassword()) +
+//                    "',hzihid:'" +  checkValue(log.getHzihid()) +
+//                    "',hzihphone:'" +  checkValue(log.getHzihphone()) +
+//                    "',hzihaddress:'" +  checkValue(log.getHzihaddress()) +
+//                    "',hzihemail:'" +  checkValue(log.getHzihemail()) +
+//                    "',hzihjobnumber:'" +  checkValue(log.getHzihjobnumber()) +
+//                    "',phonenetid:'" +  checkValue(log.getPhonenetid()) +
+//                    "',hzihcaserialNumber:'" +  checkValue(log.getHzihcaserialNumber()) +
+//                    "',terminalid:'" +  checkValue(log.getTerminalid()) +
 //                    "',terminal_pwd:'" +  checkValue(log.getTerminal_pwd()) +
 //                    "',terminal_pwd_audit:'" +  checkValue(log.getTerminal_pwd_audit()) +
-                    "',hzihdn:'" +  checkValue(log.getHzihdn()) +
-                    "',hzihprovince:'" +  checkValue(log.getHzihprovince()) +
-                    "',hzihcity:'" +  checkValue(log.getHzihcity()) +
-                    "',hzihorganization:'" +  checkValue(log.getHzihorganization()) +
-                    "',hzihinstitutions:'" +  checkValue(log.getHzihinstitutions()) +
-                    "',hzihcastatus:'" +  checkValue(log.getHzihcastatus()) +
-                    "',hzihparentca:'" +  checkValue(log.getHzihparentca()) +
-                    "',hzihcavalidity:'" +  checkValue(log.getHzihcavalidity()) +
-                    "',status:'" +  checkValue(log.getStatus()) +
-                    "',hzihcertificatetype:'" + checkValue(log.getHzihcertificatetype()) + "'" +
+//                    "',hzihdn:'" +  checkValue(log.getHzihdn()) +
+//                    "',hzihprovince:'" +  checkValue(log.getHzihprovince()) +
+//                    "',hzihcity:'" +  checkValue(log.getHzihcity()) +
+//                    "',hzihorganization:'" +  checkValue(log.getHzihorganization()) +
+//                    "',hzihinstitutions:'" +  checkValue(log.getHzihinstitutions()) +
+//                    "',hzihcastatus:'" +  checkValue(log.getHzihcastatus()) +
+//                    "',hzihparentca:'" +  checkValue(log.getHzihparentca()) +
+//                    "',hzihcavalidity:'" +  checkValue(log.getHzihcavalidity()) +
+//                    "',status:'" +  checkValue(log.getStatus()) +
+//                    "',hzihcertificatetype:'" + checkValue(log.getHzihcertificatetype()) + "'" +
+                    "',serialNumber:'" + checkValue(log.getSerialNumber()) + "'" +
+                    "',ipAddress:'" + checkValue(log.getIpAddress()) + "'" +
                     "}";
         }
         json += "]}";
@@ -313,7 +315,7 @@ public class CaUserAction extends ActionSupport {
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
         String status = request.getParameter("status");
-        PageResult pageResult =  caUserService.findByPages(username,userid,phone,email,status,null,start,limit);
+        PageResult pageResult =  caUserService.findByPages(username,/*userid,phone,email,status,null,*/start,limit);
         if(pageResult!=null){
         List<CaUser> list = pageResult.getResults();
         int count =  pageResult.getAllResultsAmount();
@@ -326,53 +328,57 @@ public class CaUserAction extends ActionSupport {
                     json += "{" +
                             "id:'"+ checkValue(log.getId())+
                             "',cn:'" +  checkValue(log.getCn()) +
-                            "',hzihpassword:'" +  checkValue(log.getHzihpassword()) +
-                            "',hzihid:'" +  checkValue(log.getHzihid()) +
-                            "',hzihphone:'" +  checkValue(log.getHzihphone()) +
-                            "',hzihaddress:'" +  checkValue(log.getHzihaddress()) +
-                            "',hzihemail:'" +  checkValue(log.getHzihemail()) +
-                            "',hzihjobnumber:'" +  checkValue(log.getHzihjobnumber()) +
-                            "',phonenetid:'" +  checkValue(log.getPhonenetid()) +
-                            "',hzihcaserialNumber:'" +  checkValue(log.getHzihcaserialNumber()) +
-                            "',terminalid:'" +  checkValue(log.getTerminalid()) +
+//                            "',hzihpassword:'" +  checkValue(log.getHzihpassword()) +
+//                            "',hzihid:'" +  checkValue(log.getHzihid()) +
+//                            "',hzihphone:'" +  checkValue(log.getHzihphone()) +
+//                            "',hzihaddress:'" +  checkValue(log.getHzihaddress()) +
+//                            "',hzihemail:'" +  checkValue(log.getHzihemail()) +
+//                            "',hzihjobnumber:'" +  checkValue(log.getHzihjobnumber()) +
+//                            "',phonenetid:'" +  checkValue(log.getPhonenetid()) +
+//                            "',hzihcaserialNumber:'" +  checkValue(log.getHzihcaserialNumber()) +
+//                            "',terminalid:'" +  checkValue(log.getTerminalid()) +
 //                            "',terminal_pwd:'" +  checkValue(log.getTerminal_pwd()) +
 //                            "',terminal_pwd_audit:'" +  checkValue(log.getTerminal_pwd_audit()) +
-                            "',hzihdn:'" +  checkValue(log.getHzihdn()) +
-                            "',hzihprovince:'" +  checkValue(log.getHzihprovince()) +
-                            "',hzihcity:'" +  checkValue(log.getHzihcity()) +
-                            "',hzihorganization:'" +  checkValue(log.getHzihorganization()) +
-                            "',hzihinstitutions:'" +  checkValue(log.getHzihinstitutions()) +
-                            "',hzihcastatus:'" +  checkValue(log.getHzihcastatus()) +
-                            "',hzihparentca:'" +  checkValue(log.getHzihparentca()) +
-                            "',hzihcavalidity:'" +  checkValue(log.getHzihcavalidity()) +
-                            "',status:'" +  checkValue(log.getStatus()) +
-                            "',hzihcertificatetype:'" + checkValue(log.getHzihcertificatetype()) + "'" +
+//                            "',hzihdn:'" +  checkValue(log.getHzihdn()) +
+//                            "',hzihprovince:'" +  checkValue(log.getHzihprovince()) +
+//                            "',hzihcity:'" +  checkValue(log.getHzihcity()) +
+//                            "',hzihorganization:'" +  checkValue(log.getHzihorganization()) +
+//                            "',hzihinstitutions:'" +  checkValue(log.getHzihinstitutions()) +
+//                            "',hzihcastatus:'" +  checkValue(log.getHzihcastatus()) +
+//                            "',hzihparentca:'" +  checkValue(log.getHzihparentca()) +
+//                            "',hzihcavalidity:'" +  checkValue(log.getHzihcavalidity()) +
+//                            "',status:'" +  checkValue(log.getStatus()) +
+//                            "',hzihcertificatetype:'" + checkValue(log.getHzihcertificatetype()) + "'" +
+                            "',serialNumber:'" + checkValue(log.getSerialNumber()) + "'" +
+                            "',ipAddress:'" + checkValue(log.getIpAddress()) + "'" +
                             "},";
                 }else {
                     json += "{" +
                             "id:'"+ checkValue(log.getId())+
                             "',cn:'" +  checkValue(log.getCn()) +
-                            "',hzihpassword:'" +  checkValue(log.getHzihpassword()) +
-                            "',hzihid:'" +  checkValue(log.getHzihid()) +
-                            "',hzihphone:'" +  checkValue(log.getHzihphone()) +
-                            "',hzihaddress:'" +  checkValue(log.getHzihaddress()) +
-                            "',hzihemail:'" +  checkValue(log.getHzihemail()) +
-                            "',hzihjobnumber:'" +  checkValue(log.getHzihjobnumber()) +
-                            "',phonenetid:'" +  checkValue(log.getPhonenetid()) +
-                            "',hzihcaserialNumber:'" +  checkValue(log.getHzihcaserialNumber()) +
-                            "',terminalid:'" +  checkValue(log.getTerminalid()) +
+//                            "',hzihpassword:'" +  checkValue(log.getHzihpassword()) +
+//                            "',hzihid:'" +  checkValue(log.getHzihid()) +
+//                            "',hzihphone:'" +  checkValue(log.getHzihphone()) +
+//                            "',hzihaddress:'" +  checkValue(log.getHzihaddress()) +
+//                            "',hzihemail:'" +  checkValue(log.getHzihemail()) +
+//                            "',hzihjobnumber:'" +  checkValue(log.getHzihjobnumber()) +
+//                            "',phonenetid:'" +  checkValue(log.getPhonenetid()) +
+//                            "',hzihcaserialNumber:'" +  checkValue(log.getHzihcaserialNumber()) +
+//                            "',terminalid:'" +  checkValue(log.getTerminalid()) +
 //                            "',terminal_pwd:'" +  checkValue(log.getTerminal_pwd()) +
 //                            "',terminal_pwd_audit:'" +  checkValue(log.getTerminal_pwd_audit()) +
-                            "',hzihdn:'" +  checkValue(log.getHzihdn()) +
-                            "',hzihprovince:'" +  checkValue(log.getHzihprovince()) +
-                            "',hzihcity:'" +  checkValue(log.getHzihcity()) +
-                            "',hzihorganization:'" +  checkValue(log.getHzihorganization()) +
-                            "',hzihinstitutions:'" +  checkValue(log.getHzihinstitutions()) +
-                            "',hzihcastatus:'" +  checkValue(log.getHzihcastatus()) +
-                            "',hzihparentca:'" +  checkValue(log.getHzihparentca()) +
-                            "',hzihcavalidity:'" +  checkValue(log.getHzihcavalidity()) +
-                            "',status:'" +  checkValue(log.getStatus()) +
-                            "',hzihcertificatetype:'" + checkValue(log.getHzihcertificatetype()) + "'" +
+//                            "',hzihdn:'" +  checkValue(log.getHzihdn()) +
+//                            "',hzihprovince:'" +  checkValue(log.getHzihprovince()) +
+//                            "',hzihcity:'" +  checkValue(log.getHzihcity()) +
+//                            "',hzihorganization:'" +  checkValue(log.getHzihorganization()) +
+//                            "',hzihinstitutions:'" +  checkValue(log.getHzihinstitutions()) +
+//                            "',hzihcastatus:'" +  checkValue(log.getHzihcastatus()) +
+//                            "',hzihparentca:'" +  checkValue(log.getHzihparentca()) +
+//                            "',hzihcavalidity:'" +  checkValue(log.getHzihcavalidity()) +
+//                            "',status:'" +  checkValue(log.getStatus()) +
+//                            "',hzihcertificatetype:'" + checkValue(log.getHzihcertificatetype()) + "'" +
+                            "',serialNumber:'" + checkValue(log.getSerialNumber()) + "'" +
+                            "',ipAddress:'" + checkValue(log.getIpAddress()) + "'" +
                             "}";
                 }
             }
@@ -391,11 +397,11 @@ public class CaUserAction extends ActionSupport {
         return value.toString();
     }
 
-    /**
+   /* *//**
      * 发布证书
      * @return
      * @throws Exception
-     */
+     *//*
     public String certificateIssued() throws Exception{
         HttpServletRequest request = ServletActionContext.getRequest();
         HttpServletResponse response = ServletActionContext.getResponse();
@@ -413,7 +419,7 @@ public class CaUserAction extends ActionSupport {
         String password = request.getParameter("password");
 //        String keyLength = request.getParameter("keyLength");
         String type = request.getParameter("type");
-       /* String[][] params = new String[][] {
+       *//* String[][] params = new String[][] {
                 {"DN",DN},
                 {"CN",CN},
                 {"validate",validate},
@@ -442,16 +448,16 @@ public class CaUserAction extends ActionSupport {
             }
         }   else {
             json = serviceResponseData;
-        }*/
+        }*//*
         writer.write(json);
         return null;
     }
 
-    /**
+    *//**
      * 吊销
      * @return
      * @throws Exception
-     */
+     *//*
     public String revokeCa() throws Exception{
         HttpServletRequest request = ServletActionContext.getRequest();
         HttpServletResponse response = ServletActionContext.getResponse();
@@ -460,7 +466,7 @@ public class CaUserAction extends ActionSupport {
         String json ="{success:false}";
         String DN = request.getParameter("DN");
         String CN = request.getParameter("CN");
-     /*   String[][] params = new String[][] {
+     *//*   String[][] params = new String[][] {
                 {"DN",DN} ,
                 {"CN",CN}
         };
@@ -489,7 +495,7 @@ public class CaUserAction extends ActionSupport {
             }
         }   else {
             json = serviceResponseData;
-        }*/
+        }*//*
         writer.write(json);
         return null;
     }
@@ -505,7 +511,7 @@ public class CaUserAction extends ActionSupport {
         String Agent = request.getHeader("User-Agent");
         StringTokenizer st = new StringTokenizer(Agent,";");
         st.nextToken();
-        /*得到用户的浏览器名  MS IE  Firefox*/
+        *//*得到用户的浏览器名  MS IE  Firefox*//*
         String userBrowser = st.nextToken();
         File file = new File(StringContext.systemPath+"/model/ImportOffLineUsers.xls");
         if(file.exists()){
@@ -517,6 +523,6 @@ public class CaUserAction extends ActionSupport {
         }
         actionBase.actionEnd(response,json,result);
         return null;
-    }
+    }*/
 
 }

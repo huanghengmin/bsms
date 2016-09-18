@@ -37,8 +37,8 @@ public interface LogService {
      * 分页查询-业务日志审计
      *
      */
-    public PageResult listBusinessLogByPage(int pageIndex, int pageLength,
-                                            Date startDate, Date endDate, String logLevel, String businessName) throws Exception;
+ /*   public PageResult listBusinessLogByPage(int pageIndex, int pageLength,
+                                            Date startDate, Date endDate, String logLevel, String businessName) throws Exception;*/
 
     /**
      * 添加用户日志

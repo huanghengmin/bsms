@@ -22,9 +22,10 @@ public class LicenseUtils {
         String sjManager = "TOP_SJGL:SECOND_YHRZ:";                                                                         //审计管理
         String csManager = "TOP_CSGL:SECOND_CSPZ:SECOND_CSFW:";                                                           //C/S服务
 //        String csManager  = "TOP_CSGL:SECOND_CSFW:";                                                           //C/S服务
-        String bsManager = "TOP_BSGL:SECOND_BSST:SECOND_BSPA:";                                                           //B/S服务
+        String bsManager = "TOP_BSGL:SECOND_BSST:SECOND_BSPA:SECOND_BSCY:SECOND_BSHMD:SECOND_BSBMD:SECOND_BSYH:SECOND_BSJS:SECOND_BSZY:";                                                           //B/S服务
 //        String xtpManager = "TOP_XTPZ:SECOND_JQFW:SECOND_DLFW:SECOND_LDAP:SECOND_SYSLOG:";                            //系统配置
-        String xtpManager = "TOP_XTPZ:SECOND_LDAP:SECOND_SYSLOG:";                            //系统配置
+//        String xtpManager = "TOP_XTPZ:SECOND_LDAP:SECOND_SYSLOG:";                            //系统配置
+        String xtpManager = "TOP_XTPZ:SECOND_SYSLOG:";                            //系统配置
         String jkManager = "TOP_JKGL:SECOND_ZJJK:";
 
         String permission = qxManager + wlManager + xtManager + sjManager + csManager + bsManager + xtpManager + jkManager;

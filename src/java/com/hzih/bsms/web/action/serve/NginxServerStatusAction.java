@@ -32,11 +32,12 @@ public class NginxServerStatusAction extends ActionSupport {
             Thread.sleep(1000*2);
             proc.exec("service nginx status");
             String msg_on = proc.getOutput();
+            if (msg_on.contains("is running")) {
 //            if(msg_on.contains("is NOT running")) {
-            if(!msg_on.contains("running")) {
-                msg = "0";
-            }else {
+//            if(!msg_on.contains("running")) {
                 msg = "1";
+            }else {
+                msg = "0";
             }
         } catch (Exception e) {
             msg = "0";
@@ -59,10 +60,11 @@ public class NginxServerStatusAction extends ActionSupport {
             proc.exec("service nginx status");
             String msg_on = proc.getOutput();
 //            if(msg_on.contains("is NOT running")) {
-            if(!msg_on.contains("running")) {
-                msg = "0";
-            }else {
+                if (msg_on.contains("is running")) {
+//            if(!msg_on.contains("running")) {
                 msg = "1";
+            }else {
+                msg = "0";
             }
         } catch (Exception e) {
             msg = "0";
@@ -83,10 +85,11 @@ public class NginxServerStatusAction extends ActionSupport {
             proc.exec("service nginx status");
             String msg_on = proc.getOutput();
 //            if(msg_on.contains("is NOT running")) {
-            if(!msg_on.contains("running")) {
-                msg = "0";
-            }else {
+                if (msg_on.contains("is running")) {
+//            if(!msg_on.contains("running")) {
                 msg = "1";
+            }else {
+                msg = "0";
             }
         } catch (Exception e){
             msg = "0";
@@ -110,10 +113,11 @@ public class NginxServerStatusAction extends ActionSupport {
                 proc.exec("service nginx status");
                 String msg_on = proc.getOutput();
 //                if(msg_on.contains("is NOT running")) {
-                if(!msg_on.contains("running")) {
-                    msg = "0";
-                }else {
+                    if (msg_on.contains("is running")) {
+//                if(!msg_on.contains("running")) {
                     msg = "1";
+                }else {
+                    msg = "0";
                 }
             } catch (Exception e){
                 msg = "0";

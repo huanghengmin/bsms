@@ -28,8 +28,6 @@ public class OpenVpnLog implements ILogFormat {
     private String reason;
     private String tbsgip;
     private String proxycn;
-
-
     private String terminalid;
     private String time;
     private String bytes;

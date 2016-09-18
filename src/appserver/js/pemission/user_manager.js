@@ -7,27 +7,29 @@ Ext.onReady(function () {
     var record = new Ext.data.Record.create([
         {name:'id', mapping:'id'} ,
         {name:'cn', mapping:'cn'} ,
-        {name:'hzihpassword', mapping:'hzihpassword'} ,
-        {name:'hzihid', mapping:'hzihid'} ,
-        {name:'hzihphone', mapping:'hzihphone'} ,
-        {name:'hzihaddress', mapping:'hzihaddress'},
-        {name:'hzihemail', mapping:'hzihemail'},
-        {name:'hzihjobnumber', mapping:'hzihjobnumber'},
-        {name:'phonenetid', mapping:'phonenetid'},
-        {name:'hzihcaserialNumber', mapping:'hzihcaserialNumber'},
-        {name:'terminalid', mapping:'terminalid'} ,
-        {name:'terminal_pwd', mapping:'terminal_pwd'},
-        {name:'terminal_pwd_audit', mapping:'terminal_pwd_audit'},
-        {name:'hzihdn', mapping:'hzihdn'},
-        {name:'hzihprovince', mapping:'hzihprovince'},
-        {name:'hzihcity', mapping:'hzihcity'},
-        {name:'hzihorganization', mapping:'hzihorganization'},
-        {name:'hzihinstitutions', mapping:'hzihinstitutions'},
-        {name:'hzihcastatus', mapping:'hzihcastatus'},
-        {name:'hzihparentca', mapping:'hzihparentca'},
-        {name:'hzihcavalidity', mapping:'hzihcavalidity'},
-        {name:'status', mapping:'status'},
-        {name:'hzihcertificatetype', mapping:'hzihcertificatetype'}
+        // {name:'hzihpassword', mapping:'hzihpassword'} ,
+        // {name:'hzihid', mapping:'hzihid'} ,
+        // {name:'hzihphone', mapping:'hzihphone'} ,
+        // {name:'hzihaddress', mapping:'hzihaddress'},
+        // {name:'hzihemail', mapping:'hzihemail'},
+        // {name:'hzihjobnumber', mapping:'hzihjobnumber'},
+        // {name:'phonenetid', mapping:'phonenetid'},
+        // {name:'hzihcaserialNumber', mapping:'hzihcaserialNumber'},
+        // {name:'terminalid', mapping:'terminalid'} ,
+        // {name:'terminal_pwd', mapping:'terminal_pwd'},
+        // {name:'terminal_pwd_audit', mapping:'terminal_pwd_audit'},
+        // {name:'hzihdn', mapping:'hzihdn'},
+        // {name:'hzihprovince', mapping:'hzihprovince'},
+        // {name:'hzihcity', mapping:'hzihcity'},
+        // {name:'hzihorganization', mapping:'hzihorganization'},
+        // {name:'hzihinstitutions', mapping:'hzihinstitutions'},
+        // {name:'hzihcastatus', mapping:'hzihcastatus'},
+        // {name:'hzihparentca', mapping:'hzihparentca'},
+        // {name:'hzihcavalidity', mapping:'hzihcavalidity'},
+        // {name:'status', mapping:'status'},
+        // {name:'hzihcertificatetype', mapping:'hzihcertificatetype'}
+        {name:'ipAddress', mapping:'ipAddress'},
+        {name:'serialNumber', mapping:'serialNumber'}
 
     ]);
 
@@ -60,11 +62,13 @@ Ext.onReady(function () {
     var colM = new Ext.grid.ColumnModel([
         boxM,
         rowNumber,
-        {header:"用户名", dataIndex:"cn",align:'center', sortable:true, menuDisabled:true,sort:true,renderer:show_username} ,
-        {header:"身份证", dataIndex:"hzihid",align:'center', sortable:true, menuDisabled:true} ,
-        {header:"联系电话", dataIndex:"hzihphone",align:'center', sortable:true, menuDisabled:true} ,
-        {header:"联系地址", dataIndex:"hzihaddress",align:'center', sortable:true, menuDisabled:true} ,
-        {header:"电子邮件", dataIndex:"hzihemail",align:'center', sortable:true, menuDisabled:true} ,
+        {header:"用户名", dataIndex:"cn",align:'center', sortable:true, menuDisabled:true,sort:true/*,renderer:show_username*/} ,
+        // {header:"身份证", dataIndex:"hzihid",align:'center', sortable:true, menuDisabled:true} ,
+        // {header:"联系电话", dataIndex:"hzihphone",align:'center', sortable:true, menuDisabled:true} ,
+        // {header:"联系地址", dataIndex:"hzihaddress",align:'center', sortable:true, menuDisabled:true} ,
+        // {header:"电子邮件", dataIndex:"hzihemail",align:'center', sortable:true, menuDisabled:true} ,
+        {header:"虚拟IP", dataIndex:"ipAddress",align:'center', sortable:true, menuDisabled:true} ,
+        {header:"证书序列号", dataIndex:"serialNumber",align:'center', sortable:true, menuDisabled:true} ,
         {header:'操作标记', dataIndex:'flag', align:'center',sortable:true, menuDisabled:true, renderer:show_flag, width:300}
     ]);
 
@@ -83,7 +87,7 @@ Ext.onReady(function () {
         return h;
     } ;
 
-    var tb = new Ext.Toolbar({
+   /* var tb = new Ext.Toolbar({
         autoWidth :true,
         autoHeight:true,
         items:[
@@ -103,7 +107,7 @@ Ext.onReady(function () {
                 handler:function () {
                     importCaUser(grid_panel, store);
                 }
-            }/*, {
+            }/!*, {
                 id:'importRaUser.info',
                 xtype:'button',
                 text:'离线导入用户',
@@ -111,16 +115,16 @@ Ext.onReady(function () {
                 handler:function () {
                     importUser(grid_panel, store);
                 }
-            }*/]
-    });
+            }*!/]
+    });*/
 
-    var typeData = [
+    /*var typeData = [
         [0,'正常'],[1,'临时阻断'],[2,'长久阻断']
     ];
     var typeDataStore = new Ext.data.SimpleStore({
         fields:['id','name'],
         data:typeData
-    });
+    });*/
 
     var tbar = new Ext.Toolbar({
         autoWidth :true,
@@ -130,7 +134,7 @@ Ext.onReady(function () {
                 name : 'username',
                 id:'hzih.tbar.raUser.username'
             }),
-            '身份证号码',
+            /*'身份证号码',
             new Ext.form.TextField({
                 id:'hzih.tbar.raUser.userid',
                 regex:/^(\d{6})()?(\d{4})(\d{2})(\d{2})(\d{3})([0-9xX])$/,
@@ -158,7 +162,7 @@ Ext.onReady(function () {
                 store: typeDataStore,
                 valueField: 'id',   //下拉框具体的值（例如值为SM，则显示的内容即为‘短信’）
                 displayField: 'name'//下拉框显示内容
-            }) ,
+            }) ,*/
             {
                 id:'tbar.tbar.raUser.info',
                 xtype:'button',
@@ -166,15 +170,15 @@ Ext.onReady(function () {
                 text:'查询',
                 handler:function () {
                     var username = Ext.getCmp('hzih.tbar.raUser.username').getValue();
-                    var userid = Ext.getCmp('hzih.tbar.raUser.userid').getValue();
-                    var phone = Ext.getCmp('hzih.tbar.raUser.phone').getValue();
-                    var email = Ext.getCmp('hzih.tbar.raUser.email').getValue();
-                    var status = Ext.getCmp('hzih.tbar.raUser.status').getValue();
+                    // var userid = Ext.getCmp('hzih.tbar.raUser.userid').getValue();
+                    // var phone = Ext.getCmp('hzih.tbar.raUser.phone').getValue();
+                    // var email = Ext.getCmp('hzih.tbar.raUser.email').getValue();
+                    // var status = Ext.getCmp('hzih.tbar.raUser.status').getValue();
                     store.setBaseParam('username', username);
-                    store.setBaseParam('userid', userid);
-                    store.setBaseParam('phone', phone);
-                    store.setBaseParam('email', email);
-                    store.setBaseParam('status', status);
+                    // store.setBaseParam('userid', userid);
+                    // store.setBaseParam('phone', phone);
+                    // store.setBaseParam('email', email);
+                    // store.setBaseParam('status', status);
                     store.load({
                         params : {
                             start : start,
@@ -203,12 +207,12 @@ Ext.onReady(function () {
         cm:colM,
         sm:boxM,
         store:store,
-        tbar : tb,
-        listeners:{
+        tbar : tbar,
+        /*listeners:{
             render:function(){
                 tbar.render(this.tbar);
             }
-        },
+        },*/
         bbar:page_toolbar
     });
 
@@ -263,7 +267,7 @@ function show_flag(value, p, r){
 };
 
 
-function show_username(value,p,r){
+/*function show_username(value,p,r){
     if(value.indexOf("_")>-1){
         return value.substring(0,value.indexOf("_"));
     }else if(value.indexOf(" ")>-1){
@@ -271,12 +275,12 @@ function show_username(value,p,r){
     }else{
         return value;
     }
-}
+}*/
 
 var viewDetailed = function(){
     var grid_panel = Ext.getCmp("grid.info");
     var recode = grid_panel.getSelectionModel().getSelected();
-    var status =recode.get("hzihcastatus")
+  /*  var status =recode.get("hzihcastatus")
     var statusValue;
     if(status=="0"){
         statusValue= "新增"
@@ -290,11 +294,11 @@ var viewDetailed = function(){
         statusValue= "已吊销"
     } else if(status=="5"){
         statusValue= "已废除"
-    }
+    }*/
     var  cn = recode.get("cn");
-    if(cn.contains("_")){
+  /*  if(cn.contains("_")){
         cn = cn.substring(0,cn.indexOf("_"));
-    }
+    }*/
 
     var formPanel = new Ext.form.FormPanel({
         frame:true,
@@ -314,7 +318,7 @@ var viewDetailed = function(){
                 fieldLabel:'用户名称',
                 value:cn
             }),
-            new Ext.form.DisplayField({
+           /* new Ext.form.DisplayField({
                 fieldLabel:'身份证',
                 value:recode.get("hzihid")
             }),
@@ -345,6 +349,14 @@ var viewDetailed = function(){
             new Ext.form.DisplayField({
                 fieldLabel:'状态',
                 value:statusValue
+            })*/
+            new Ext.form.DisplayField({
+                fieldLabel:'虚拟IP',
+                value:recode.get("ipAddress")
+            })  ,
+            new Ext.form.DisplayField({
+                fieldLabel:'证书序列号',
+                value:recode.get("serialNumber")
             })
         ]
     });
@@ -360,11 +372,11 @@ var viewDetailed = function(){
     select_Win.show();
 };         //查看详细
 
-var revokeCa = function(){
+/*var revokeCa = function(){
     var grid = Ext.getCmp('grid.info');
     var recode = grid.getSelectionModel().getSelected();
     var CN =recode.get("cn");
-    var DN  = recode.get("hzihdn");
+    // var DN  = recode.get("hzihdn");
     Ext.Msg.confirm("警告", "确认吊销证书,吊销后证书不可用!", function (sid) {
         if (sid == "yes") {
             Ext.Ajax.request({
@@ -570,12 +582,12 @@ var certificateIssued = function(){
 //            }
 //        ]
 //    }).show();
-};   //发布证书
+};   //发布证书*/
 
 function viewRaUser(){
     var grid_panel = Ext.getCmp("grid.info");
     var recode = grid_panel.getSelectionModel().getSelected();
-    var status =recode.get("status")
+   /* var status =recode.get("status")
     var statusValue;
     if(status=="0"){
         statusValue= "正常"
@@ -583,12 +595,12 @@ function viewRaUser(){
         statusValue= "临时阻断"
     } else if(status=="2"){
         statusValue= "长久阻断"
-    }
+    }*/
 
     var  cn = recode.get("cn");
-    if(cn.indexOf("_")>-1){
+  /*  if(cn.indexOf("_")>-1){
         cn = cn.substring(0,cn.indexOf("_"));
-    }
+    }*/
 
     var formPanel = new Ext.form.FormPanel({
         frame:true,
@@ -608,7 +620,7 @@ function viewRaUser(){
                 fieldLabel:'用户名',
                 value:cn
             }),
-            new Ext.form.DisplayField({
+           /* new Ext.form.DisplayField({
                 fieldLabel:'身份证',
                 value:recode.get("hzihid")
             }),
@@ -639,6 +651,14 @@ function viewRaUser(){
             new Ext.form.DisplayField({
                 fieldLabel:'状态',
                 value:statusValue
+            })*/
+            new Ext.form.DisplayField({
+                fieldLabel:'虚拟IP',
+                value:recode.get("ipAddress")
+            })  ,
+            new Ext.form.DisplayField({
+                fieldLabel:'证书序列号',
+                value:recode.get("serialNumber")
             })
         ]
     });
@@ -654,8 +674,8 @@ function viewRaUser(){
     select_Win.show();
 };
 
-function importCaUser(grid_panel,store){
-   /* var record = new Ext.data.Record.create([
+/*function importCaUser(grid_panel,store){
+   /!* var record = new Ext.data.Record.create([
         {name:'ldap_ip', mapping:'ldap_ip'},
         {name:'ldap_port', mapping:'ldap_port'} ,
         {name:'administrator', mapping:'administrator'} ,
@@ -695,8 +715,8 @@ function importCaUser(grid_panel,store){
 //        Ext.getCmp('bs.ip').setValue(bs_ip);
 //        Ext.getCmp('bs.port').setValue(bs_port);
 
-    });*/
-  /* var formPanel = new Ext.form.FormPanel({
+    });*!/
+  /!* var formPanel = new Ext.form.FormPanel({
         frame:true,
         autoScroll:true,
         labelWidth:150,
@@ -710,8 +730,8 @@ function importCaUser(grid_panel,store){
             allowBlank : false,
             blankText : '该项不能为空！'
         },
-        items:[*/
-          /*  new Ext.form.TextField({
+        items:[*!/
+          /!*  new Ext.form.TextField({
                 fieldLabel : '鉴权评估服务器IP',
                 name : 'ip',
                 editable:false,
@@ -721,7 +741,7 @@ function importCaUser(grid_panel,store){
                 emptyText:"请输入 鉴权评估服务器IP",
                 allowBlank : false,
                 blankText : "不能为空，请正确填写"
-            })*//*,
+            })*!//!*,
             new Ext.form.TextField({
                 fieldLabel : 'ldap连接端口',
                 id:"ra.ldap.port",
@@ -778,9 +798,9 @@ function importCaUser(grid_panel,store){
                         this.getEl().up('.x-form-item').setDisplayed(false)  ;
                     }
                 }
-            })*/
-     /*   ]
-    });*/
+            })*!/
+     /!*   ]
+    });*!/
 
 
     var grid_panel = Ext.getCmp("grid.info");
@@ -827,7 +847,7 @@ function importCaUser(grid_panel,store){
 //    }
 
 
-   /* var win = new Ext.Window({
+   /!* var win = new Ext.Window({
         title:"导入鉴权用户",
         width:500,
         layout:'fit',
@@ -886,7 +906,7 @@ function importCaUser(grid_panel,store){
                         });
                     }
                 }
-            }*//*,{
+            }*!//!*,{
                 text:'保存配置',
                 handler:function(){
                     if (formPanel.form.isValid()) {
@@ -935,7 +955,7 @@ function importCaUser(grid_panel,store){
                         });
                     }
                 }
-            }*/
+            }*!/
 //        ]
 //    }).show();
 };
@@ -968,7 +988,7 @@ function importUser(grid_panel,store){
                     downloadModel();
                 }
             },
-            /*{
+            /!*{
                 xtype:'combo',
                 emptyText :'--请选择--',
                 editable : false,
@@ -1012,7 +1032,7 @@ function importUser(grid_panel,store){
 //                name:'hzihCa.hzihprovince',
                 allowBlank:false,
                 blankText:"隶属地区"
-            }),*/ {
+            }),*!/ {
                 id:'uploadFile',
                 fieldLabel:'请求文件',
                 xtype:'textfield',
@@ -1079,9 +1099,9 @@ function importUser(grid_panel,store){
             }
         ]
     }).show();
-};
+};*/
 
-function downloadModel() {
+/*function downloadModel() {
     if (!Ext.fly('test')) {
         var frm = document.createElement('form');
         frm.id = 'test';
@@ -1097,7 +1117,7 @@ function downloadModel() {
         method:'POST',
         isUpload:true
     });
-};
+};*/
 
 function deleteRaUser() {
     var grid_panel = Ext.getCmp("grid.info");
@@ -1129,9 +1149,9 @@ function updateRaUser() {
     var grid_panel = Ext.getCmp("grid.info");
     var recode = grid_panel.getSelectionModel().getSelected();
     var text = recode.get('cn');
-    if(text.indexOf("_")>-1){
+/*    if(text.indexOf("_")>-1){
         text = text.substring(0,text.indexOf("_"));
-    }
+    }*/
 
     var formPanel = new Ext.form.FormPanel({
         frame:true,
@@ -1181,7 +1201,7 @@ function updateRaUser() {
                 allowBlank : false,
                 blankText : "不能为空，请正确填写"
             }),*/
-            new Ext.form.TextField({
+            /*new Ext.form.TextField({
                 fieldLabel : '身份证号码',
                 readOnly:true,
                 value: recode.get('hzihid'),
@@ -1251,6 +1271,23 @@ function updateRaUser() {
                 name : 'caUser.hzihcaserialNumber',
                 emptyText:"请输入您所有证书序列号",
                 value: recode.get('hzihcaserialNumber'),
+                allowBlank : false,
+                blankText : "证书序列号"
+            })*/
+            new Ext.form.TextField({
+                fieldLabel : '虚拟IP',
+                name : 'caUser.ipAddress',
+                emptyText:"虚拟IP",
+                value: recode.get('ipAddress'),
+                allowBlank : false,
+                blankText : "虚拟IP"
+            }),
+            new Ext.form.TextField({
+                fieldLabel : '证书序列号',
+                readOnly:true,
+                name : 'caUser.serialNumber',
+                emptyText:"请输入您所有证书序列号",
+                value: recode.get('serialNumber'),
                 allowBlank : false,
                 blankText : "证书序列号"
             })
@@ -1330,7 +1367,7 @@ function updateRaUser() {
     }).show();
 };
 
-function sleepRaUser(){
+/*function sleepRaUser(){
     var grid_panel = Ext.getCmp("grid.info");
     var recode = grid_panel.getSelectionModel().getSelected();
     if(!recode){
@@ -1617,7 +1654,7 @@ function addRaUser(grid_panel, store){
             }
         ]
     }).show();
-};
+};*/
 
 
 

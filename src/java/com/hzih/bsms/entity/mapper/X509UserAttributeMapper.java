@@ -24,7 +24,7 @@ public class X509UserAttributeMapper {
 
 //        caUser.setDn(sr.getNameInNamespace());
 
-        if (attr.get(X509User.getIdCardAttr()) != null) {
+       /* if (attr.get(X509User.getIdCardAttr()) != null) {
             caUser.setHzihid((String) attr.get(X509User.getIdCardAttr()).get());
         }
         if (attr.get(X509User.getPhoneAttr()) != null) {
@@ -35,7 +35,7 @@ public class X509UserAttributeMapper {
         }
         if (attr.get(X509User.getUserEmailAttr()) != null) {
             caUser.setHzihemail((String) attr.get(X509User.getUserEmailAttr()).get());
-        }
+        }*/
         /*if (attr.get(X509User.getEmployeeCodeAttr()) != null) {
             caUser.setEmployeeCode((String) attr.get(X509User.getEmployeeCodeAttr()).get());
         }*/
@@ -45,12 +45,12 @@ public class X509UserAttributeMapper {
         if (attr.get(caUser.getPwdAttr()) != null) {
             caUser.setPwd((String)attr.get(caUser.getPwdAttr()).get());
         }*/
-        if (attr.get(X509User.getCertStatusAttr()) != null) {
+        /*if (attr.get(X509User.getCertStatusAttr()) != null) {
             caUser.setHzihcastatus((String)attr.get(X509User.getCertStatusAttr()).get());
         }
         if (attr.get(X509User.getSerialAttr()) != null) {
             caUser.setHzihcaserialNumber((String)attr.get(X509User.getSerialAttr()).get());
-        }
+        }*/
        /* if (attr.get(X509User.getCreateDateAttr()) != null) {
             caUser.setCreateDate((String)attr.get(X509User.getCreateDateAttr()).get());
         }
@@ -60,13 +60,13 @@ public class X509UserAttributeMapper {
         if (attr.get(X509User.getIssueCaAttr()) != null) {
             caUser.setIssueCa((String)attr.get(X509User.getIssueCaAttr()).get());
         }*/
-        if (attr.get(X509User.getCertTypeAttr()) != null) {
+        /*if (attr.get(X509User.getCertTypeAttr()) != null) {
             caUser.setHzihcertificatetype((String)attr.get(X509User.getCertTypeAttr()).get());
-        }
+        }*/
         /*if (attr.get(X509User.getKeyLengthAttr()) != null) {
             caUser.setKeyLength((String)attr.get(X509User.getKeyLengthAttr()).get());
         }*/
-        if (attr.get(X509User.getValidityAttr()) != null) {
+       /* if (attr.get(X509User.getValidityAttr()) != null) {
             caUser.setHzihcavalidity((String)attr.get(X509User.getValidityAttr()).get());
         }
         if (attr.get(X509User.getProvinceAttr()) != null) {
@@ -80,7 +80,7 @@ public class X509UserAttributeMapper {
         }
         if (attr.get(X509User.getInstitutionAttr()) != null) {
             caUser.setHzihinstitutions((String)attr.get(X509User.getInstitutionAttr()).get());
-        }
+        }*/
         /*if (attr.get(X509User.getDescAttr()) != null) {
             caUser.setDesc((String)attr.get(X509User.getDescAttr()).get());
         }*/

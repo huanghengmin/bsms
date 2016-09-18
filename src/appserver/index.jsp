@@ -233,11 +233,72 @@
                 url: 'pages/bs/manager_params.jsp'
             });
 
+            var mrn_6_3 = new Ext.tree.TreeNode({
+                id: 'mrn_6_3',
+                text: '服务策略 ',
+                leaf: true,
+                url: 'pages/bs/strategy.jsp'
+            });
+
+            var mrn_6_4 = new Ext.tree.TreeNode({
+                id: 'mrn_6_4',
+                text: '白名单 ',
+                leaf: true,
+                url: 'pages/bs/whiteList.jsp'
+            });
+
+            var mrn_6_5 = new Ext.tree.TreeNode({
+                id: 'mrn_6_5',
+                text: '黑名单 ',
+                leaf: true,
+                url: 'pages/bs/blackList.jsp'
+            });
+
+
+            var mrn_6_6 = new Ext.tree.TreeNode({
+                id:'mrn_6_6',
+                text:'用户管理',
+                leaf:true,
+                url:'pages/permission/user_manager.jsp'
+            });
+
+            var mrn_6_7 = new Ext.tree.TreeNode({
+                id:'mrn_6_7',
+                text:'角色管理',
+                leaf:true,
+                url:'pages/permission/role_manager.jsp'
+            });
+
+            var mrn_6_8 = new Ext.tree.TreeNode({
+                id:'mrn_6_8',
+                text:'资源管理',
+                leaf:true,
+                url:'pages/permission/resources_manager.jsp'
+            });
+
             <lbs:access code="SECOND_BSST">
             menu_root_node_6.appendChild(mrn_6_1);
             </lbs:access>
             <lbs:access code="SECOND_BSPA">
             menu_root_node_6.appendChild(mrn_6_2);
+            </lbs:access>
+            <lbs:access code="SECOND_BSCY">
+            menu_root_node_6.appendChild(mrn_6_3);
+            </lbs:access>
+            <lbs:access code="SECOND_BSHMD">
+            menu_root_node_6.appendChild(mrn_6_4);
+            </lbs:access>
+            <lbs:access code="SECOND_BSBMD">
+            menu_root_node_6.appendChild(mrn_6_5);
+            </lbs:access>
+            <lbs:access code="SECOND_BSYH">
+            menu_root_node_6.appendChild(mrn_6_6);
+            </lbs:access>
+            <lbs:access code="SECOND_BSJS">
+            menu_root_node_6.appendChild(mrn_6_7);
+            </lbs:access>
+            <lbs:access code="SECOND_BSZY">
+            menu_root_node_6.appendChild(mrn_6_8);
             </lbs:access>
 
             /* var mrn_7_1 = new Ext.tree.TreeNode({
@@ -252,12 +313,12 @@
              leaf: true ,
              url: 'pages/source/bs_proxy.jsp'
              }) ;*/
-            var mrn_7_3 = new Ext.tree.TreeNode({
+        /*    var mrn_7_3 = new Ext.tree.TreeNode({
                 id: 'mrn_7_3',
                 text: 'LDAP配置 ',
                 leaf: true,
                 url: 'pages/ldap/ldap_config.jsp'
-            });
+            });*/
             var mrn_7_4 = new Ext.tree.TreeNode({
                 id: 'mrn_7_4',
                 text: '日志服务器 ',
@@ -271,9 +332,9 @@
             <%--<lbs:access code="SECOND_DLFW">--%>
             <%--menu_root_node_7.appendChild(mrn_7_2) ;--%>
             <%--</lbs:access>--%>
-            <lbs:access code="SECOND_LDAP">
-            menu_root_node_7.appendChild(mrn_7_3);
-            </lbs:access>
+            <%--<lbs:access code="SECOND_LDAP">--%>
+            <%--menu_root_node_7.appendChild(mrn_7_3);--%>
+            <%--</lbs:access>--%>
             <lbs:access code="SECOND_SYSLOG">
             menu_root_node_7.appendChild(mrn_7_4);
             </lbs:access>

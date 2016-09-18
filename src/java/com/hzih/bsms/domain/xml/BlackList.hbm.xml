@@ -3,8 +3,9 @@
 
 <hibernate-mapping>
     <class table="black_list" name="com.hzih.bsms.domain.BlackList">
-        <id access="field" name="url" type="java.lang.String" column="url">
+        <id access="field" name="id" type="int" column="id" length="10">
+            <generator class="increment"/>
         </id>
-        <!--<property name="status" length="10" column="status" access="field" type="int"/>-->
+        <property name="url"  column="url" unique="true" access="field" type="string"/>
     </class>
 </hibernate-mapping>

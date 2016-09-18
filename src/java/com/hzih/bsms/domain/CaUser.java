@@ -1,6 +1,5 @@
 package com.hzih.bsms.domain;
 
-import java.util.Date;
 import java.util.Set;
 
 /**
@@ -13,31 +12,33 @@ import java.util.Set;
 public class CaUser {
     private int id;                 //数据库id
     private String cn;              //用户名
-    private String user_ip;
-    private String vpn_ip;
-    private int on;
-    private int status;      //授权访问状态
-    private String hzihpassword;   //密码
-    private String repassword;     //重复密码
-    private String hzihid;          //身份证
-    private String hzihphone;      //电话
-    private String hzihaddress;    //地址
-    private String hzihemail;      //邮箱
-    private String hzihjobnumber; //警号
-    private String phonenetid;    //入网串号
-    private String hzihcaserialNumber;     //证书序列号
-    private String terminalid;      //终端编号
+    private String serialNumber;
+    private String ipAddress;
+//    private String user_ip;
+//    private String vpn_ip;
+//    private int on;
+//    private int status;      //授权访问状态
+//    private String hzihpassword;   //密码
+//    private String repassword;     //重复密码
+//    private String hzihid;          //身份证
+//    private String hzihphone;      //电话
+//    private String hzihaddress;    //地址
+//    private String hzihemail;      //邮箱
+//    private String hzihjobnumber; //警号
+//    private String phonenetid;    //入网串号
+//    private String hzihcaserialNumber;     //证书序列号
+//    private String terminalid;      //终端编号
     //    private String terminal_pwd;    //终端密码
 //    private String terminal_pwd_audit;  //终端密码审批
-    private String hzihdn;                //ldap数据库DN
-    private String hzihprovince ;      //省
-    private String hzihcity;            //市
-    private String hzihorganization;      //组织
-    private String hzihinstitutions;     //机构
-    private String hzihcastatus;         //证书发布状态
-    private String hzihparentca;        //父ca路径
-    private String hzihcavalidity;  //证书有效期
-    private String hzihcertificatetype;  //ca发证证书类型
+//    private String hzihdn;                //ldap数据库DN
+//    private String hzihprovince ;      //省
+//    private String hzihcity;            //市
+//    private String hzihorganization;      //组织
+//    private String hzihinstitutions;     //机构
+//    private String hzihcastatus;         //证书发布状态
+//    private String hzihparentca;        //父ca路径
+//    private String hzihcavalidity;  //证书有效期
+//    private String hzihcertificatetype;  //ca发证证书类型
 //    private String abnormalFlag;   //违规超限
 //    private String abnormalMessage;    //违规消息
 //    private String logFlag;     //日志标识
@@ -49,16 +50,16 @@ public class CaUser {
 //    private String abnormalProcess;  //违规进程列表
 //    private String wifi_msg;
 //    private String booth_msg;
-    private int viewFlag = 0;     //截屏
+//    private int viewFlag = 0;     //截屏
 //    private int location = 0;     //上传地理位置
 //    private String date;        //日期
 //    private String msg;     //违规信息
     private Set<CaRole> caRoles;
-    private Date logindate;     //登陆时间
-    private Date createdate;    //创建时间
-    private Date onlinetime;    //在线时间
+//    private Date logindate;     //登陆时间
+//    private Date createdate;    //创建时间
+//    private Date onlinetime;    //在线时间
 
-    public int getOn() {
+   /* public int getOn() {
         return on;
     }
 
@@ -80,7 +81,7 @@ public class CaUser {
 
     public void setTerminalid(String terminalid) {
         this.terminalid = terminalid;
-    }
+    }*/
 
   public Set<CaRole> getCaRoles() {
         return caRoles;
@@ -130,7 +131,7 @@ public class CaUser {
         this.location = location;
     }*/
 
-    public String getUser_ip() {
+   /* public String getUser_ip() {
         return user_ip;
     }
 
@@ -144,7 +145,7 @@ public class CaUser {
 
     public void setVpn_ip(String vpn_ip) {
         this.vpn_ip = vpn_ip;
-    }
+    }*/
 
 /*    public String getLocationstr() {
 
@@ -181,7 +182,7 @@ public class CaUser {
         this.cn = cn;
     }
 
-    public String getHzihcavalidity() {
+    /*public String getHzihcavalidity() {
         return hzihcavalidity;
     }
 
@@ -243,7 +244,7 @@ public class CaUser {
 
     public void setHzihjobnumber(String hzihjobnumber) {
         this.hzihjobnumber = hzihjobnumber;
-    }
+    }*/
 
 /*    public String getPhonenetid() {
         return phonenetid;
@@ -253,13 +254,13 @@ public class CaUser {
         this.phonenetid = phonenetid;
     }*/
 
-    public String getHzihcaserialNumber() {
+    /*public String getHzihcaserialNumber() {
         return hzihcaserialNumber;
     }
 
     public void setHzihcaserialNumber(String hzihcaserialNumber) {
         this.hzihcaserialNumber = hzihcaserialNumber;
-    }
+    }*/
 
    /* public String getTerminalid() {
         return terminalid;
@@ -285,7 +286,7 @@ public class CaUser {
         this.terminal_pwd_audit = terminal_pwd_audit;
     }
 */
-    public String getHzihdn() {
+   /* public String getHzihdn() {
         return hzihdn;
     }
 
@@ -355,7 +356,7 @@ public class CaUser {
 
     public void setHzihcertificatetype(String hzihcertificatetype) {
         this.hzihcertificatetype = hzihcertificatetype;
-    }
+    }*/
 
   /*  public String getAbnormalFlag() {
         return abnormalFlag;
@@ -429,7 +430,7 @@ public class CaUser {
         this.runProcesses = runProcesses;
     }*/
 
-    public int getViewFlag() {
+    /*public int getViewFlag() {
         return viewFlag;
     }
 
@@ -459,5 +460,21 @@ public class CaUser {
 
     public void setOnlinetime(Date onlinetime) {
         this.onlinetime = onlinetime;
+    }*/
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
     }
 }

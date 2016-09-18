@@ -17,7 +17,7 @@ public class LogServiceImpl implements LogService {
     private final static Logger logger = Logger.getLogger(LogServiceImpl.class);
     private SysLogDao sysLogDao;
     private UserOperLogDao userOperLogDao;
-    private BusinessLogDao businessLogDao;
+//    private BusinessLogDao businessLogDao;
     private EquipmentLogDao equipmentLogDao;
 
 
@@ -29,9 +29,11 @@ public class LogServiceImpl implements LogService {
         this.userOperLogDao = userOperLogDao;
     }
 
+/*
     public void setBusinessLogDao(BusinessLogDao businessLogDao) {
         this.businessLogDao = businessLogDao;
     }
+*/
 
     public void setEquipmentLogDao(EquipmentLogDao equipmentLogDao) {
         this.equipmentLogDao = equipmentLogDao;
@@ -55,13 +57,13 @@ public class LogServiceImpl implements LogService {
         return ps;
     }
 
-    public PageResult listBusinessLogByPage(int pageIndex, int pageLength,
+    /*public PageResult listBusinessLogByPage(int pageIndex, int pageLength,
                                             Date startDate, Date endDate, String logLevel, String businessName) throws Exception {
         logger.debug("startDate:" + startDate + " endDate:" + endDate);
         PageResult ps = this.businessLogDao.listLogsByParams(pageIndex,
                 pageLength, startDate, endDate, logLevel, businessName);
         return ps;
-    }
+    }*/
 
     public void newLog(String level, String userName, String auditModule,
                        String auditInfo) {
