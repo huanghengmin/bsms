@@ -43,7 +43,7 @@ public class SquidLogRotateTask extends TimerTask {
                             String username = user.getCn();
                             String msg = "用户:" + username + ",请求信息:" + obj.getRequest_msg() + ",请求浏览器信息:" + obj.getClient_msg() + ",返回码:" + obj.getResult_code() + ",请求流量：" + obj.getRequest_bytes() + ",返回流量：" + obj.getReply_bytes() + ",主机地址:" + obj.getHost() + ",时间:" + obj.getDate();
                             logger.info(msg);
-                            SysLogSend.sysLog(msg);
+                            //SysLogSend.sysLog(msg);
                         }
                     }
                     f.delete();

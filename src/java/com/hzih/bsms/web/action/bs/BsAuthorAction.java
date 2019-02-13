@@ -229,7 +229,7 @@ public class BsAuthorAction extends ActionSupport {
                                   " reason="+"鉴权评估鉴定通过!允许访问"+" mamsip="+noFlag+" proxycn="+noFlag+"" +
                                   " terminalid="+noFlag+" time="+new Date()+" bytes="+noFlag+"" +
                                   " upbytes="+noFlag+"  serviceid=\"1\"";
-                        SysLogSend.sysLog(syslog);
+                        //SysLogSend.sysLog(syslog);
                          response.setStatus(200);
 //                      } else {
 //                          response.setStatus(403);
@@ -242,7 +242,7 @@ public class BsAuthorAction extends ActionSupport {
                               " reason="+"鉴权评估鉴定权限未通过,BS禁止访问!"+" mamsip="+noFlag+" proxycn="+noFlag+"" +
                               " terminalid="+noFlag+" time="+new Date()+" bytes="+noFlag+"" +
                               " upbytes="+noFlag+"  serviceid=\"1\"";
-                      SysLogSend.sysLog(syslog);
+                      //SysLogSend.sysLog(syslog);
                       response.setStatus(403);
                       logger.info("CERT_HEX_SN:"+serialNumber+",CERT_CN:"+CERT_CN+"访问地址:"+uri+"鉴权评估鉴定权限未通过,BS禁止访问!");
                   }
@@ -252,7 +252,7 @@ public class BsAuthorAction extends ActionSupport {
                          " reason="+"BS鉴权否认！未访问到目标鉴权评估!"+" mamsip="+noFlag+" proxycn="+noFlag+"" +
                          " terminalid="+noFlag+" time="+new Date()+" bytes="+noFlag+"" +
                          " upbytes="+noFlag+"  serviceid=\"1\"";
-                 SysLogSend.sysLog(syslog);
+                 //SysLogSend.sysLog(syslog);
                  response.setStatus(403);
                  logger.info("CERT_HEX_SN:"+serialNumber+",CERT_CN:"+CERT_CN+"访问地址:"+uri+"BS鉴权否认！未访问到目标鉴权评估!");
              }
@@ -274,7 +274,7 @@ public class BsAuthorAction extends ActionSupport {
                     " reason="+"BS未启用访问控制！允许访问"+" mamsip="+noFlag+" proxycn="+noFlag+"" +
                     " terminalid="+noFlag+" time="+new Date()+" bytes="+noFlag+"" +
                     " upbytes="+noFlag+" serviceid=\"1\"";
-            SysLogSend.sysLog(syslog);
+            //SysLogSend.sysLog(syslog);
                 logger.info("CERT_HEX_SN:"+serialNumber+",CERT_CN:"+CERT_CN+"访问地址:"+uri+"BS未启用访问控制！允许访问");
                 response.setStatus(200);
 //            } else {

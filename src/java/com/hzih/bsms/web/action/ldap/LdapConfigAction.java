@@ -55,14 +55,14 @@ public class LdapConfigAction extends ActionSupport {
             msg = "LDAP配置保存成功";
             json = "{success:true,msg:'" + msg + "'}";
             logger.info("管理员" + SessionUtils.getAccount(request).getUserName() + ",操作时间:" + new Date() + ",操作信息:" + msg);
-            SysLogSend.sysLog("管理员" + SessionUtils.getAccount(request).getUserName() + ",操作时间:" + new Date() + ",操作信息:" + msg);
+            //SysLogSend.sysLog("管理员" + SessionUtils.getAccount(request).getUserName() + ",操作时间:" + new Date() + ",操作信息:" + msg);
             logService.newLog("INFO", SessionUtils.getAccount(request).getUserName(), "LDAP配置", msg);
 
         }else {
             msg = "LDAP配置保存失败";
             json = "{success:false,msg:'" + msg + "'}";
             logger.info("管理员" + SessionUtils.getAccount(request).getUserName() + ",操作时间:" + new Date() + ",操作信息:" + msg);
-            SysLogSend.sysLog("管理员" + SessionUtils.getAccount(request).getUserName() + ",操作时间:" + new Date() + ",操作信息:" + msg);
+            //SysLogSend.sysLog("管理员" + SessionUtils.getAccount(request).getUserName() + ",操作时间:" + new Date() + ",操作信息:" + msg);
             logService.newLog("INFO", SessionUtils.getAccount(request).getUserName(), "LDAP配置", msg);
         }
         actionBase.actionEnd(response,json,result);

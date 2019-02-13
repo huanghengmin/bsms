@@ -32,7 +32,8 @@ public class SquidServerStatusAction extends ActionSupport {
             String msg_on = proc.getOutput();
 //            logger.info(msg_on);
 //            if(msg_on.contains("No running copy")) {
-                if (msg_on.contains("is running")) {
+//                if (msg_on.contains("is running")) {
+                if (msg_on.contains("running")) {
                 msg = "1";
             }else {
                 msg = "0";
@@ -59,7 +60,8 @@ public class SquidServerStatusAction extends ActionSupport {
             String msg_on = proc.getOutput();
 //            logger.info(msg_on);
 //            if(msg_on.contains("No running copy")) {
-                if (msg_on.contains("is running")) {
+//                if (msg_on.contains("is running")) {
+                if (msg_on.contains("running")) {
                 msg = "1";
             }else {
                 msg = "0";
@@ -85,7 +87,8 @@ public class SquidServerStatusAction extends ActionSupport {
 //            logger.info("error_output:"+msg_on);
 //            logger.info("output:"+ proc.getOutput());
 //            if(msg_on.contains("No running copy")) {
-            if (msg_on.contains("is running")) {
+//            if (msg_on.contains("is running")) {
+                if (msg_on.contains("running")) {
                 msg = "1";
             }else {
                 msg = "0";
@@ -113,7 +116,8 @@ public class SquidServerStatusAction extends ActionSupport {
                 String msg_on = proc.getOutput();
 //                logger.info(msg_on);
 //                if(msg_on.contains("No running copy")) {
-                if (msg_on.contains("is running")) {
+//                if (msg_on.contains("is running")) {
+                    if (msg_on.contains("running")) {
                     msg = "1";
                 }else {
                     msg = "0";

@@ -94,7 +94,7 @@ public class AccessControl extends ActionSupport {
             }
         if(!flag){
             String ss ="logflag=\"TBSGS\" on=\"3\" serial=\""+serial+"\" userip=\"-\" accessurl=\""+access+"\" orgcode=\"-\" username=\""+username+"\" identity=\""+username+"\" accessreturn=\"Y\" reason=\"success\" tbsgip=\"-\" proxycn=\""+username+"\" terminalid=\"-\" time=\""+access_time+"\" bytes=\"0\" upbytes=\"0\" serviceid=\"3\"";
-            SysLogSend.sysLog(ss);
+            //SysLogSend.sysLog(ss);
         } else {
             json = "true";
         }

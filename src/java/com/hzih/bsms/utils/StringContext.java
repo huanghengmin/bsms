@@ -8,6 +8,13 @@ package com.hzih.bsms.utils;
  * To change this template use File | Settings | File Templates.
  */
 public class StringContext {
+    public final static String serviceName = "bs" ;
+    public static final String bak_file = "bsms_bak.tar.gz";
+    public static final String config_path = StringContext.systemPath +"/config";
+    public static final String license_path = StringContext.systemPath +"/license";
+    public static final String server_path = StringContext.systemPath +"/server";
+    public static final String mysql_bak_sql = StringContext.systemPath + "/mysqlbak.sql";
+    public static final String iptables_rules_files = "/etc/iptables.rules";
     public final static String systemPath = System.getProperty("bs.home");
     public final static String INTERFACE = "/etc/network/interfaces";//linux下IP信息存储文件
     public final static String IFSTATE ="/etc/network/run/ifstate"; //linux下DNS信息
@@ -24,7 +31,7 @@ public class StringContext {
     public final static String bsps_tcp_config = systemPath+"/config/tcp.conf";
 //    public final static String bsps_nginx_config = systemPath+"/config/bsPx.conf";
 //    public final static String bsps_t_http_config = systemPath+"/config/config.conf";
-    
+
     public final static String webPath = systemPath+"/tomcat/webapps"; //war服务文件存储目录
     public final static String tempPath = systemPath+"/tomcat/temp"; //缓存目录
 
@@ -49,6 +56,7 @@ public class StringContext {
     public static final String SECURITY_CONFIG = StringContext.systemPath +"/tomcat/conf/server.xml";
     public static final String ldap_xml = StringContext.systemPath +"/config/ldap.xml";
     public static final String syslog_xml = StringContext.systemPath +"/config/syslog.xml";
+
 //    public static final int UPDATE_APP = -1;//更新应用
 //    public static final int INSERT_APP = 1;//新增应用
 //    public static final int INIT_APP = 0;//目标端更新后修改源应用的status  或者发送后源端应用状态

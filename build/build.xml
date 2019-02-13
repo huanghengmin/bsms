@@ -136,7 +136,8 @@
 
             <pathelement location="${sharelib.dir}/jsonrpc/2.0/json-smart-1.2.jar"/>
 
-
+            <pathelement location="${sharelib.dir}/apache/ant/ant.jar"/>
+            <pathelement location="${sharelib.dir}/apache/commons-compress-1.8.1-bin/commons-compress-1.8.1/commons-compress-1.8.1.jar"/>
 
 
             <pathelement location="${sharelib.dir}/jna/jna.jar"/>
@@ -157,7 +158,7 @@
     </target>
 
     <!--fxdb jgp-->
-    <target name="fxdb" >
+    <target name="fxdb">
         <copy preservelastmodified="yes" todir="${src.dir}/appserver/img" overwrite="true">
             <fileset dir="${src.dir}/custom/fx-db/">
                 <include name="*.jpg"/>
@@ -171,7 +172,7 @@
         </copy>
     </target>
 
-    
+
     <target name="wars" depends="jars">
         <delete file="${project.war}"/>
         <war warfile="${project.war}" webxml="${src.dir}/appserver/WEB-INF/web.xml">
@@ -266,6 +267,9 @@
 
             <lib file="${sharelib.dir}/jna/jna.jar"/>
             <lib file="${sharelib.dir}/iptables/iptables-java-0.1.jar"/>
+
+            <lib file="${sharelib.dir}/apache/ant/ant.jar"/>
+            <lib file="${sharelib.dir}/apache/commons-compress-1.8.1-bin/commons-compress-1.8.1/commons-compress-1.8.1.jar"/>
 
             <!--<lib file="${sharelib.dir}/jakarta/struts/struts-el.jar"/>-->
             <lib file="${sharelib.dir}/jakarta/struts/struts.jar"/>

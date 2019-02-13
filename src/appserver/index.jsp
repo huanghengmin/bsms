@@ -19,17 +19,17 @@
 </head>
 <body>
 <DIV id=top-div>
-    <DIV id=funmenu><A onclick="setFrontPage();return false;"
-                       href="javascript:void(0);"><IMG src="img/house.png">设为首页</A>| <A
-            onclick=window.external.AddFavorite(location.href,document.title);
-            href="javascript:void(0);"><IMG src="img/page_white_office.png">加入收藏</A>|
-        <A onclick="showUpdatePwd();return false;" href="javascript:void(0);"><IMG
-                src="img/key.png">修改密码</A>| <A onclick="logout();return false;"
-                                               href="javascript:void(0);"><IMG src="img/door_out.png">退出系统</A></DIV>
+    <DIV id=funmenu>
+        <A onclick="setFrontPage();return false;"href="javascript:void(0);"><IMG src="img/house.png">设为首页</A>|
+        <A onclick=window.external.AddFavorite(location.href,document.title);href="javascript:void(0);"><IMG src="img/page_white_office.png">加入收藏</A>|
+        <A onclick="showUpdatePwd();return false;" href="javascript:void(0);"><IMG src="img/key.png">修改密码</A>|
+        <A onclick="logout();return false;" href="javascript:void(0);"><IMG src="img/door_out.png">退出系统</A>
+    </DIV>
 </DIV>
 <DIV>
     <script type="text/javascript">
         var centerPanel;
+        var titleText = "中盾B/S应用管理系统";
         Ext.onReady(function () {
             Ext.QuickTips.init();
             Ext.form.Field.prototype.msgTarget = 'side';
@@ -256,24 +256,24 @@
 
 
             var mrn_6_6 = new Ext.tree.TreeNode({
-                id:'mrn_6_6',
-                text:'用户管理',
-                leaf:true,
-                url:'pages/permission/user_manager.jsp'
+                id: 'mrn_6_6',
+                text: '用户管理',
+                leaf: true,
+                url: 'pages/permission/user_manager.jsp'
             });
 
             var mrn_6_7 = new Ext.tree.TreeNode({
-                id:'mrn_6_7',
-                text:'角色管理',
-                leaf:true,
-                url:'pages/permission/role_manager.jsp'
+                id: 'mrn_6_7',
+                text: '角色管理',
+                leaf: true,
+                url: 'pages/permission/role_manager.jsp'
             });
 
             var mrn_6_8 = new Ext.tree.TreeNode({
-                id:'mrn_6_8',
-                text:'资源管理',
-                leaf:true,
-                url:'pages/permission/resources_manager.jsp'
+                id: 'mrn_6_8',
+                text: '资源管理',
+                leaf: true,
+                url: 'pages/permission/resources_manager.jsp'
             });
 
             <lbs:access code="SECOND_BSST">
@@ -313,12 +313,12 @@
              leaf: true ,
              url: 'pages/source/bs_proxy.jsp'
              }) ;*/
-        /*    var mrn_7_3 = new Ext.tree.TreeNode({
-                id: 'mrn_7_3',
-                text: 'LDAP配置 ',
-                leaf: true,
-                url: 'pages/ldap/ldap_config.jsp'
-            });*/
+            /*    var mrn_7_3 = new Ext.tree.TreeNode({
+                    id: 'mrn_7_3',
+                    text: 'LDAP配置 ',
+                    leaf: true,
+                    url: 'pages/ldap/ldap_config.jsp'
+                });*/
             var mrn_7_4 = new Ext.tree.TreeNode({
                 id: 'mrn_7_4',
                 text: '日志服务器 ',
@@ -460,33 +460,86 @@
                     }
                 }, {
                     xtype: 'tbseparator'
-                }, {
-                    pressed: false,
-                    text: '刷新',
-                    iconCls: 'refresh',
-                    handler: function () {
-                        var mID = centerPanel.getActiveTab().getId();
-                        if (centerPanel.getActiveTab().getStateId() == null) {
-                            window.frames[0].location.reload();
-                        } else {
-                            window.parent.document.getElementById('frame_' + mID).contentWindow.location.reload();
+                },
+                    {
+                        pressed: false,
+                        text: '备份系统',
+                        iconCls: 'bak',
+                        handler: function () {
+                            bak();
+                        }
+                    }, {
+                        xtype: 'tbseparator'
+                    },
+                    {
+                        pressed: false,
+                        text: '上传系统恢复包',
+                        iconCls: 'uploadBak',
+                        handler: function () {
+                            uploadBak();
+                        }
+                    }, {
+                        xtype: 'tbseparator'
+                    },
+                    {
+                        pressed: false,
+                        text: '还原系统',
+                        iconCls: 'restoreBak',
+                        handler: function () {
+                            restoreBak();
+                        }
+                    }, {
+                        xtype: 'tbseparator'
+                    },
+                    {
+                        pressed: false,
+                        text: '刷新',
+                        iconCls: 'refresh',
+                        handler: function () {
+                            var mID = centerPanel.getActiveTab().getId();
+                            if (centerPanel.getActiveTab().getStateId() == null) {
+                                window.frames[0].location.reload();
+                            } else {
+                                window.parent.document.getElementById('frame_' + mID).contentWindow.location.reload();
+                            }
+                        }
+                    }, {
+                        xtype: 'tbseparator'
+                    }, {
+                        pressed: false,
+                        text: '帮助',
+                        iconCls: 'help',
+                        handler: function () {
+                            window.open('help.doc');
+                        }
+                        /*},{
+                         xtype: 'tbseparator'
+                         },{
+                         xtype:"combo",
+                         width: 120*/
+                    },
+                    {
+                        xtype: 'tbseparator'
+                    }
+                    ,
+                    {
+                        pressed: false,
+                        text: '关于',
+                        iconCls: 'about',
+                        handler: function () {
+                            new Ext.Window({
+                                title: "关于",
+                                width: 350,
+                                layout: 'fit',
+                                height: 150,
+                                modal: true,
+                                items: [{
+                                    html: '&nbsp;&nbsp;&nbsp;系统名称:<br>&nbsp;&nbsp;&nbsp;' + titleText +
+                                        '<br>&nbsp;&nbsp;&nbsp;版本号：V2.6.0.20160225 <br>'
+                                }]
+                            }).show();
                         }
                     }
-                }, {
-                    xtype: 'tbseparator'
-                }, {
-                    pressed: false,
-                    text: '帮助',
-                    iconCls: 'help',
-                    handler: function () {
-                        window.open('help.doc');
-                    }
-                    /*},{
-                     xtype: 'tbseparator'
-                     },{
-                     xtype:"combo",
-                     width: 120*/
-                }
                 ]
             });
 
@@ -499,6 +552,12 @@
                 border: false, 				//是否显示边框
                 collapsible: false, 		//是否可以收缩,默认不可以收缩，即不显示收缩箭头
                 height: 86,
+                html: '<div id="top" style="border:1px solid #564b47;background-color:#fff;height:55;width:100%;background-image: url(img/top.jpg);">' +
+                    '<div id="text" style="position: absolute; top: 5px; left: 180px;">' +
+                    '<p style="color: #ffffff;font-size:30px;text-align: center">' + titleText + '</p></div>' +
+                    '<div style="height:55;border:0 solid #564b47;float:right;width:400px;margin:0px 0px 0px 0px;background-image: url(img/top_1.png);">' +
+                    '</div>' +
+                    '</div>',
                 bbar: northBar
             });
 
@@ -610,7 +669,7 @@
                 enableTabScroll: true,
                 activeTab: 0,
                 items: [{
-                    title:'系统状态',
+                    title: '系统状态',
 //                            closable:true,
                     html: '<iframe id="frame_0" width="100%" height="100%" frameborder="0" src="pages/monitor/monitor_system.jsp"></iframe>'
                 }]
@@ -639,7 +698,7 @@
                                 location.href = "login.jsp";
                             }
                         },
-                        failure:function (response) {
+                        failure: function (response) {
                             alert("会话过期，请重新登录");
                             location.href = "login.jsp";
                         }
@@ -711,6 +770,7 @@
             }]
         });
         var pwdWin;
+
         function showUpdatePwd() {
             if (!pwdWin) {
                 var pwdWin = new Ext.Window({
@@ -778,6 +838,189 @@
                 });
             }
             centerPanel.setActiveTab(id);
+        }
+
+
+        function bak() {
+            Ext.Msg.confirm("消息", "是否备份?", function (sid) {
+                if (sid == "yes") {
+                    Ext.Ajax.request({
+                        url: 'BakAction_bak.action',
+                        timeout: 20 * 60 * 1000,
+                        method: 'POST',
+                        success: function (response, options) {
+                            var o = Ext.util.JSON.decode(response.responseText);
+                            Ext.Msg.alert('消息', o.msg);
+                        },
+                        failure: function (response, options) {
+                            var o = Ext.util.JSON.decode(response.responseText);
+                            Ext.Msg.alert('消息', o.msg);
+                        }
+                    });
+                }
+            });
+        }
+
+        function uploadBak() {
+            var form = new Ext.form.FormPanel({
+                baseCls: 'x-plain',
+                labelWidth: 150,
+                labelAlign: 'right',
+                fileUpload: true,
+                defaultType: 'textfield',
+                defaults: {
+                    anchor: '95%',
+                    allowBlank: false,
+                    blankText: '该项不能为空！'
+                },
+                items: [
+                    {
+                        id: 'uploadFile',
+                        allowBlank: false,
+                        name: 'uploadFile',
+                        fieldLabel: '系统恢复包',
+                        xtype: 'textfield',
+                        inputType: 'file',
+                        editable: false
+                    },
+                ]
+            });
+
+            var win = new Ext.Window({
+                title: '上传系统恢复包',
+                width: 500,
+                height: 300,
+                layout: 'fit',
+                plain: true,
+                bodyStyle: 'padding:5px;',
+                buttonAlign: 'center',
+                items: form,
+                bbar: [
+                    '->', {
+                        text: '上传系统恢复包',
+                        id: 'uploadBak.submit',
+                        handler: function () {
+                            if (form.getForm().isValid()) {
+                                form.getForm().submit({
+                                    url: 'BakAction_uploadBak.action',
+                                    timeout: 20 * 60 * 1000,
+                                    method: "POST",
+                                    waitTitle: '系统提示',
+                                    waitMsg: '正在上传...',
+                                    success: function (form, action) {
+                                        Ext.MessageBox.alert("提示", action.result.msg);
+                                        store.reload();
+                                        win.close();
+                                    },
+                                    failure: function (form, action) {
+                                        var msg = action.result.msg;
+                                        Ext.MessageBox.show({
+                                            title: '信息',
+                                            width: 250,
+                                            msg: msg,
+                                            buttons: Ext.MessageBox.OK,
+                                            buttons: {'ok': '确定'},
+                                            icon: Ext.MessageBox.ERROR,
+                                            closable: false
+                                        });
+                                    }
+                                });
+                            }
+                        }
+                    }, {
+                        text: '关闭',
+                        handler: function () {
+                            win.close();
+                        }
+                    }]
+            });
+            win.show();
+        }
+
+
+        function restoreBak() {
+            Ext.Msg.confirm("消息", "是否还原系统到备份点?", function (sid) {
+                if (sid == "yes") {
+                    var restoreBakForm = new Ext.FormPanel({
+                        region: 'center',
+                        deferredRender: true,
+                        frame: true,
+                        border: false,
+                        labelAlign: 'right',
+                        defaults: {xtype: "textfield", inputType: "password"},
+                        items: [
+                            {
+                                xtype: 'textfield',
+                                fieldLabel: '输入系统密码',
+                                id: 'p_NewPassword',
+                                anchor: '95%',
+                                value: '123456',
+                                minLength: 6,
+                                minLengthText: '密码长度最少6位！',
+                                maxLength: 20,
+                                maxLengthText: '密码长度最多20位！',
+                                inputType: 'password',
+                                allowBlank: false
+                            }
+                        ]
+                    });
+                    var restoreBakWin = new Ext.Window({
+                        layout: 'border',
+                        width: 310,
+                        height: 160,
+                        plain: true,
+                        modal: true,
+                        title: '校验系统密码',
+                        resizable: false,
+                        items: restoreBakForm,
+                        buttons: [
+                            {
+                                text: '保存',
+                                listeners: {
+                                    'click': function () {
+                                        var passwd = Ext.getCmp("p_NewPassword").getValue();
+                                        restoreBakForm.getForm().submit({
+                                            clientValidation: true,
+                                            url: 'SystemAction_checkPasswd.action',
+                                            params: {password: hex_md5(passwd).toUpperCase()},
+                                            success: function (form, action) {
+                                                restoreBakWin.close();
+                                                Ext.Ajax.request({
+                                                    url: 'BakAction_bakRestore.action',
+                                                    timeout: 20 * 60 * 1000,
+                                                    method: 'POST',
+                                                    success: function (response, options) {
+                                                        var o = Ext.util.JSON.decode(response.responseText);
+                                                        Ext.Msg.alert('消息', o.msg);
+                                                    },
+                                                    failure: function (response, options) {
+                                                        var o = Ext.util.JSON.decode(response.responseText);
+                                                        Ext.Msg.alert('消息', o.msg);
+                                                    }
+                                                });
+                                            },
+                                            failure: function (form, action) {
+                                                Ext.Msg.alert('校验失败', '输入系统密码错误，请重新输入！');
+                                                restoreBakWin.close();
+                                            }
+                                        });
+                                    }
+                                }
+                            },
+                            {
+                                text: '退出',
+                                listeners: {
+                                    'click': function () {
+                                        restoreBakWin.close();
+                                    }
+                                }
+                            }
+                        ]
+
+                    });
+                    restoreBakWin.show();
+                }
+            });
         }
 
     </script>
